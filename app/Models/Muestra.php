@@ -17,4 +17,8 @@ class muestra extends Model
         'descripcion',
         'formato_muestra_id'
     ];
+
+    public function Formato_muestra(){
+        return $this->hasOne('App\Models\Formato_muestra');
+    }
 }
