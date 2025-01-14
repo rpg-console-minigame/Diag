@@ -7,7 +7,7 @@
     <title>Formulario Muestra</title>
 </head>
 <body>
-    <form method="POST" action="/ruta-al-controlador">
+    <form action="{{ route('guardar') }}" method="POST">
         @csrf
         
         <label for="description">Descripción:</label>

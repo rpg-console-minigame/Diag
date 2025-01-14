@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/formulario',[MuestraController::class, 'Datos']);
+Route::post('/guardar', [MuestraController::class, 'Guardar'])->name('guardar');
