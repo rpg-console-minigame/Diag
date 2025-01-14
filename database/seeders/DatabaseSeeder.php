@@ -14,11 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $formatos = [
+            'Fresco',
+            'Formol',
+            'Etanol 70%'
+        ];
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        foreach ($formatos as $formato) {
+            \App\Models\Formato_muestra::factory()->create([
+                'nombre' => $formato
+            ]);
+        }
     }
 }
