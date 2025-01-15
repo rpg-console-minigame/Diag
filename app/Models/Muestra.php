@@ -15,10 +15,14 @@ class muestra extends Model
 
     protected $fillable = [
         'descripcion',
-        'formato_muestra_id'
+        'formato_muestra_id',
+        'sede_id'
     ];
 
     public function Formato_muestra(){
         return $this->hasOne('App\Models\Formato_muestra');
+    }
+    public function Sede(){
+        return $this->hasOne('App\Models\Sede');
     }
 }
