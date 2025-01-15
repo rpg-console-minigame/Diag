@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/formulario',[MuestraController::class, 'Datos']);
+Route::get('/formulario',[MuestraController::class, 'WelcomeWithData']);
 Route::post('/guardar', [MuestraController::class, 'Guardar'])->name('guardar');

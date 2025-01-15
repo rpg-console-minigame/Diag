@@ -26,6 +26,11 @@
                 <option value="{{ $sede->id }}">{{ $sede->nombre }}</option>
             @endforeach
         </select>
+        <select name="tipo_naturaleza_id" id="naturaleza">
+            @foreach ($tNaturalezas as $tNaturaleza)
+                <option value="{{ $tNaturaleza->id }}">{{ $tNaturaleza->nombre }}</option>
+            @endforeach
+        </select>
         <button type="submit">Enviar</button>
     </form>
 </body>
