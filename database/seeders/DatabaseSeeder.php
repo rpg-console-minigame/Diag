@@ -48,5 +48,22 @@ class DatabaseSeeder extends Seeder
         foreach ($sedes as $sede) {
             Sede::create($sede);
         }
+
+        $codificacionMuestras = [
+            ['nombre' => 'Biopsias', 'sigla' => 'B'],
+            ['nombre' => 'Biopsias veterinarias', 'sigla' => 'BV'],
+            ['nombre' => 'Cavidad bucal', 'sigla' => 'CB'],
+            ['nombre' => 'Citología vaginal', 'sigla' => 'CV'],
+            ['nombre' => 'Extensión sanguínea', 'sigla' => 'EX'],
+            ['nombre' => 'Orinas', 'sigla' => 'O'],
+            ['nombre' => 'Esputos', 'sigla' => 'E'],
+            ['nombre' => 'Semen', 'sigla' => 'ES'],
+            ['nombre' => 'Improntas', 'sigla' => 'T'],
+            ['nombre' => 'Frotis', 'sigla' => 'F'],
+        ];
+
+        foreach ($codificacionMuestras as $codificacionMuestra) {
+            \App\Models\Tipo_naturaleza::create($codificacionMuestra);
+        }
     }
 }

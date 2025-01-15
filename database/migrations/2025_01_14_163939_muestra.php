@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreign('formato_muestra_id')->references('id')->on('formato_muestra');
             $table->unsignedBigInteger('sede_id');
             $table->foreign('sede_id')->references('id')->on('sede');
+            $table->unsignedBigInteger('tipo_naturaleza_id');
+            $table->foreign('tipo_naturaleza_id')->references('id')->on('tipo_naturaleza');
             $table->timestamps();
             
         });

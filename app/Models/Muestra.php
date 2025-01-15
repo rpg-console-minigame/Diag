@@ -16,7 +16,8 @@ class muestra extends Model
     protected $fillable = [
         'descripcion',
         'formato_muestra_id',
-        'sede_id'
+        'sede_id',
+        'tipo_naturaleza_id'
     ];
 
     public function Formato_muestra(){
@@ -24,5 +25,9 @@ class muestra extends Model
     }
     public function Sede(){
         return $this->hasOne('App\Models\Sede');
+    }
+
+    public function Tipo_naturaleza(){
+        return $this->hasOne('App\Models\Tipo_naturaleza');
     }
 }
