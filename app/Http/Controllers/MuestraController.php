@@ -40,7 +40,6 @@ class MuestraController extends Controller
         $muestra->sede_id = $request->input('sede_id');
         $muestra->tipo_naturaleza_id = $request->input('tipo_naturaleza_id');
         $muestra->calidad_id = $request->input('calidad_id');
-        $muestra->tipo_estudio_id = $request->input('tipo_estudio_id');
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->extension();

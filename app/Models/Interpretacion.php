@@ -15,6 +15,7 @@ class Interpretacion extends Model
 
     protected $fillable = [
         'texto',
+        'clave',
         'tipo_estudio_id'
     ];
 

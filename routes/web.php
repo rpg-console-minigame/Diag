@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MuestraController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InterpretacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,6 @@ Route::get('/', function () {
 
 Route::get('/formulario',[MuestraController::class, 'WelcomeWithData']);
 Route::post('/guardar', [MuestraController::class, 'Guardar'])->name('guardar');
+
+Route::get('/interpretaciones', [InterpretacionController::class, 'index'])->name('interpretaciones');
+Route::post('/interpretar', [InterpretacionController::class, 'create'])->name('interpretar');

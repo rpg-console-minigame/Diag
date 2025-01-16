@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('interpretacion', function (Blueprint $table) {
             $table->id();
             $table->string('texto');
+            $table->string('clave');
             $table->unsignedBigInteger('tipo_estudio_id');
             $table->foreign('tipo_estudio_id')->references('id')->on('tipo_estudio');
             $table->timestamps();

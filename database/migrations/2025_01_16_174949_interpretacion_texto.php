@@ -13,7 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('interpretacion_texto', function (Blueprint $table) {
+            $table->id();
+            $table->string('texto');
+            $table->unsignedBigInteger('id_muestra');
+            $table->foreign('id_muestra')->references('id')->on('muestra');
+            $table->unsignedBigInteger('id_interpretacion');
+            $table->foreign('id_interpretacion')->references('id')->on('interpretacion');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('interpretacion_texto');
     }
 };

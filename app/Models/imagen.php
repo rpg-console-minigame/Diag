@@ -19,7 +19,7 @@ class Imagen extends Model
         'muestra_id'
     ];
 
-    public function diag()
+    public function muestra()
     {
         return $this->belongsTo(Muestra::class);
     }
