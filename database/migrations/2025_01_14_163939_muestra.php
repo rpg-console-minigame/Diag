@@ -16,7 +16,16 @@ return new class extends Migration
         Schema::create('muestra', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion');
-            $table->integer('formato_muestra_id');
+            $table->unsignedBigInteger('formato_muestra_id');
+            $table->foreign('formato_muestra_id')->references('id')->on('formato_muestra');
+            $table->unsignedBigInteger('sede_id');
+            $table->foreign('sede_id')->references('id')->on('sede');
+            $table->unsignedBigInteger('tipo_naturaleza_id');
+            $table->foreign('tipo_naturaleza_id')->references('id')->on('tipo_naturaleza');
+            $table->unsignedBigInteger('calidad_id');
+            $table->foreign('calidad_id')->references('id')->on('calidad');
+            $table->unsignedBigInteger('tipo_estudio_id');
+            $table->foreign('tipo_estudio_id')->references('id')->on('tipo_estudio');
             $table->timestamps();
             
         });
@@ -29,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('muestra');
     }
 };

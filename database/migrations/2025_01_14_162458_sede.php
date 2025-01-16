@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('formato_muestra', function (Blueprint $table) {
+        Schema::create('sede', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->string('siglas');
             $table->timestamps();
             
         });
@@ -28,6 +29,7 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('sede');
+        
     }
 };
