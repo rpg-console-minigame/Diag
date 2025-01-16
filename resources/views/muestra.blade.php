@@ -11,6 +11,20 @@
 <body>
     <form action="{{ route('guardar') }}" method="POST">
         @csrf
+        <label for="tipo_estudio">Tipo de Estudio:</label>
+        <select name="tipo_estudio_id" id="tipo_estudio">
+            @foreach ($tEstudios as $tipoEstudio)
+                <option value="{{ $tipoEstudio->id }}">{{ $tipoEstudio->nombre }}</option>
+            @endforeach
+        </select>
+
+        <label for="calidad">Calidad:</label>
+        <select name="calidad_id" id="calidad">
+            @foreach ($calidades as $calidad)
+                <option value="{{ $calidad->id }}" data-tipo-estudio="{{ $calidad->tipo_estudio_id }}">
+                    {{ $calidad->nombre }}</option>
+            @endforeach
+        </select>
 
         <label for="description">Descripción:</label>
         <input type="text" name="description" id="description" placeholder="Descripción">
@@ -34,5 +48,24 @@
         <button type="submit">Enviar</button>
     </form>
 </body>
-
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tipoEstudioSelect = document.getElementById('tipo_estudio');
+        const calidadSelect = document.getElementById('calidad');
+        const calidades = Array.from(calidadSelect.options);
+
+        tipoEstudioSelect.addEventListener('change', function() {
+            const selectedTipoEstudio = this.value;
+            calidadSelect.innerHTML = '';
+
+            calidades.forEach(function(calidad) {
+                if (calidad.dataset.tipoEstudio === selectedTipoEstudio) {
+                    calidadSelect.appendChild(calidad);
+                }
+            });
+        });
+
+        tipoEstudioSelect.dispatchEvent(new Event('change'));
+    });
+</script>

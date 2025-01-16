@@ -65,5 +65,50 @@ class DatabaseSeeder extends Seeder
         foreach ($codificacionMuestras as $codificacionMuestra) {
             \App\Models\Tipo_naturaleza::create($codificacionMuestra);
         }
+
+
+        // crear 20 tipos de estudio
+        $tipoEstudios = [
+            'Anatomía Patológica',
+            'Análisis Clínicos',
+            'Bacteriología',
+            'Bioquímica',
+            'Citología',
+            'Drogas de abuso',
+            'Genética',
+            'Hematología',
+            'Inmunología',
+            'Microbiología',
+            'Parasitología',
+            'Serología',
+            'Toxicología',
+            'Urinálisis',
+            'Virología',
+            'Análisis de aguas',
+            'Análisis de alimentos',
+            'Análisis de suelos',
+            'Análisis de superficies',
+            'Análisis de tejidos vegetales',
+        ];
+        foreach ($tipoEstudios as $tipoEstudio) {
+            \App\Models\Tipo_estudio::create([
+                'nombre' => $tipoEstudio
+            ]);
+        }
+
+        // crear 3 calidades por cada tipo de estudio
+        $calidades = [
+            'Baja',
+            'Media',
+            'Alta'
+        ];
+        foreach (\App\Models\Tipo_estudio::all() as $tipoEstudio) {
+            foreach ($calidades as $calidad) {
+                \App\Models\Calidad::create([
+                    'nombre' => $calidad.' '.$tipoEstudio->nombre,
+                    'tipo_estudio_id' => $tipoEstudio->id
+                ]);
+            }
+        }
     }
 }
