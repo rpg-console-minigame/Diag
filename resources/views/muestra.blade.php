@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <form action="{{ route('guardar') }}" method="POST">
+    <form action="{{ route('guardar') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <label for="tipo_estudio">Tipo de Estudio:</label>
         <select name="tipo_estudio_id" id="tipo_estudio">
@@ -45,6 +45,9 @@
                 <option value="{{ $tNaturaleza->id }}">{{ $tNaturaleza->nombre }}</option>
             @endforeach
         </select>
+        <input type="number" name="aumento" placeholder="Aumento">
+        <label for="image">Imagen</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
         <button type="submit">Enviar</button>
     </form>
 </body>
