@@ -6,7 +6,7 @@
     <title>Formulario de Registro</title>
 </head>
 <body>
-    <form action="{{ route('reguistro') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('registroenter') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <h2>Formulario de Registro</h2>
         <label for="name">Nombre</label><br>

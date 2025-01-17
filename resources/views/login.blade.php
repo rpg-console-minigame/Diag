@@ -6,7 +6,7 @@
     <title>Inicio de Sesión</title>
 </head>
 <body>
-    <form action="{{ route('login') }}" method="POST">
+    <form action="{{ route('loginenter') }}" method="POST">
         @csrf
         <h2>Inicio de Sesión</h2>
         <label for="email">Correo Electrónico</label><br>

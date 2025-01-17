@@ -17,19 +17,17 @@ use App\Models\User;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [UserController::class, 'welcomeWittData'])->name('welcome');
 
-Route::get('/formulario',[MuestraController::class, 'WelcomeWithData']);
+Route::get('/crearmuestra',[MuestraController::class, 'MuestraWithData'])->name('crearmuestra');
 
-Route::get('/login',[UserController::class, 'index']);
+Route::get('/login',[UserController::class, 'index'])->name('login');
 
-Route::post('/login',[UserController::class, 'login'])->name('login');
+Route::post('/loginenter',[UserController::class, 'login'])->name('loginenter');
 
-Route::get('/reguistro',[UserController::class, 'Datos']);
+Route::get('/registro',[UserController::class, 'Datos'])->name('registro');
 
-Route::post('/reguistro',[UserController::class, 'Guardar'])->name('reguistro');
+Route::post('/registroenter',[UserController::class, 'Guardar'])->name('registroenter');
 
 Route::post('/guardar', [MuestraController::class, 'Guardar'])->name('guardar');
 

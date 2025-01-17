@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sede;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Muestra;
 
 class UserController extends Controller
 {
@@ -22,7 +23,7 @@ class UserController extends Controller
         $user->password = bcrypt($data['password']);
         $user->sede_id = $data['sede_id'];
         $user->save();
-        return redirect()->route('reguistro');
+        return redirect()->route('registro');
     }
 
     public function index()
@@ -40,5 +41,16 @@ class UserController extends Controller
             return redirect()->route('welcome');
         }
         return redirect()->route('login');  
+    }
+    public function welcomeWittData()
+    {
+        session_start();
+        if(!session('user')){
+            return redirect()->route('login');
+        }
+        else {
+            $muestras = Muestra::where('user_id', session('user')->getKey())->get();
+            return view('welcome', ['muestras' => $muestras]);
+        }
     }
 }

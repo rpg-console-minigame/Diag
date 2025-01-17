@@ -13,7 +13,7 @@ use App\Models\Imagen;
 
 class MuestraController extends Controller
 {
-    public function WelcomeWithData()
+    public function MuestraWithData()
     {
         $fMuestras = Formato_muestra::all();
         $sedes = Sede::all();
@@ -34,12 +34,17 @@ class MuestraController extends Controller
 
     public function guardar(Request $request)
     {
+        session_start();
+        if (!session()->has('user')) {
+            return redirect('/login')->withErrors(['msg' => 'User not logged in']);
+        }
         $muestra = new Muestra();
         $muestra->descripcion = $request->input('description');
         $muestra->formato_muestra_id = $request->input('muestra_id');
-        $muestra->sede_id = $request->input('sede_id');
+        $muestra->sede_id = session('user')->sede_id;
         $muestra->tipo_naturaleza_id = $request->input('tipo_naturaleza_id');
         $muestra->calidad_id = $request->input('calidad_id');
+        $muestra->user_id = session('user')->getAuthIdentifier();
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->extension();
@@ -51,6 +56,6 @@ class MuestraController extends Controller
             $img->muestra_id = $muestra->id;
             $img->save();
         }
-        return redirect('/formulario');
+        return redirect(route ('welcome'));
     }
 }

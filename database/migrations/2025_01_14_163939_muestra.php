@@ -24,8 +24,10 @@ return new class extends Migration
             $table->foreign('tipo_naturaleza_id')->references('id')->on('tipo_naturaleza');
             $table->unsignedBigInteger('calidad_id');
             $table->foreign('calidad_id')->references('id')->on('calidad');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
-            
+                        
         });
     }
 
