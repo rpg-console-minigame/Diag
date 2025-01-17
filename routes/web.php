@@ -3,6 +3,8 @@
 use App\Http\Controllers\MuestraController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InterpretacionController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +19,18 @@ use App\Http\Controllers\InterpretacionController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/formulario',[MuestraController::class, 'WelcomeWithData']);
+
+Route::get('/login',[UserController::class, 'index']);
+
+Route::post('/login',[UserController::class, 'login'])->name('login');
+
+Route::get('/reguistro',[UserController::class, 'Datos']);
+
+Route::post('/reguistro',[UserController::class, 'Guardar'])->name('reguistro');
+
 Route::post('/guardar', [MuestraController::class, 'Guardar'])->name('guardar');
 
 Route::get('/interpretaciones', [InterpretacionController::class, 'index'])->name('interpretaciones');

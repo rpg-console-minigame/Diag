@@ -23,6 +23,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function Sede(){
+        return $this->hasOne('App\Models\Sede');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
