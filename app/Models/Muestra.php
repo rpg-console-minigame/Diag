@@ -19,7 +19,6 @@ class muestra extends Model
         'sede_id',
         'tipo_naturaleza_id',
         'calidad_id',
-        'tipo_estudio_id',
     ];
 
     public function Formato_muestra(){

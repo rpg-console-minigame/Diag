@@ -110,10 +110,11 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
-
+        $contador = 0;
         foreach(\App\Models\Tipo_estudio::all() as $tipoEstudio){
             for($i = 0; $i < 3; $i++){
                 \App\Models\Interpretacion::create([
+                    'clave' => $contador++,
                     'texto' => 'Interpretación '.$tipoEstudio->nombre.' '.$i,
                     'tipo_estudio_id' => $tipoEstudio->id
                 ]);
