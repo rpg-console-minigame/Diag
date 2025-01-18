@@ -12,7 +12,7 @@ class UserController extends Controller
     public function Datos()
     {
         $sedes = Sede::all();
-        return view('reguister', ['sedes' => $sedes]);
+        return view('register', ['sedes' => $sedes]);
     }
 
     public function Guardar(){

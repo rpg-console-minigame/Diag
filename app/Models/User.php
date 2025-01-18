@@ -22,7 +22,9 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
+    public function getName(){
+        return $this->name;
+    }
     public function Sede(){
         return $this->hasOne('App\Models\Sede');
     }
