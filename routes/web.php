@@ -33,3 +33,5 @@ Route::post('/guardar', [MuestraController::class, 'Guardar'])->name('guardar');
 
 Route::get('/interpretaciones', [InterpretacionController::class, 'index'])->name('interpretaciones');
 Route::post('/interpretar', [InterpretacionController::class, 'create'])->name('interpretar');
+Route::get('/interpretaciones/{id}', [InterpretacionController::class, 'show'])->name('interpretaciones.show');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');

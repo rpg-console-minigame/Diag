@@ -21,7 +21,7 @@ class MuestraController extends Controller
         $calidad = Calidad::all();
         $tipo_estudio = Tipo_estudio::all();
         return view(
-            'muestra',
+            'muestracrear',
             [
                 'fMuestras' => $fMuestras,
                 'sedes' => $sedes,
