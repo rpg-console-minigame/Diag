@@ -79,6 +79,7 @@
                             <p class="card-text">Calidad: {{ $muestra->calidad->nombre }}</p>
                         </div>
                     </div>
+                    <a href="{{ route('muestra', ['id' => $muestra->id]) }}" class="btn btn-primary btn-block mt-2">Ver Detalles</a>
                 </div>
             @endforeach
         </div>

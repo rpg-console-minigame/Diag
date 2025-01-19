@@ -19,19 +19,18 @@ use App\Models\User;
 
 Route::get('/', [UserController::class, 'welcomeWittData'])->name('welcome');
 
-Route::get('/crearmuestra',[MuestraController::class, 'MuestraWithData'])->name('crearmuestra');
-
 Route::get('/login',[UserController::class, 'index'])->name('login');
-
 Route::post('/loginenter',[UserController::class, 'login'])->name('loginenter');
 
 Route::get('/registro',[UserController::class, 'Datos'])->name('registro');
-
 Route::post('/registroenter',[UserController::class, 'Guardar'])->name('registroenter');
 
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::get('/crearmuestra',[MuestraController::class, 'MuestraWithData'])->name('crearmuestra');
 Route::post('/guardar', [MuestraController::class, 'Guardar'])->name('guardar');
+Route::get('/muestra/{id}', [MuestraController::class, 'muestraInfo'])->name('muestra');
 
 Route::get('/interpretaciones', [InterpretacionController::class, 'index'])->name('interpretaciones');
 Route::post('/interpretar', [InterpretacionController::class, 'create'])->name('interpretar');
-Route::get('/interpretaciones/{id}', [InterpretacionController::class, 'show'])->name('interpretaciones.show');
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
