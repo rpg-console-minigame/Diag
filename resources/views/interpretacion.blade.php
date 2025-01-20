@@ -65,6 +65,8 @@
                                     <option value="{{ $interpretacion->id }}">{{ $interpretacion->clave }}</option>
                                 @endforeach
                             </select>
+                            {{-- submit --}}
+                            <input type="submit" value="Enviar" class="btn btn-submit btn-block mt-4">
                         </div>
 
                         <!-- Botón Enviar -->
