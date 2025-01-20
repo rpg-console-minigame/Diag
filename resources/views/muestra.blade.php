@@ -48,16 +48,17 @@
                     <ul class="list-group list-group-flush">
                         @foreach($interpretaciones as $interpretacion)
                             <li class="list-group-item">
-                                <p class="card-text"><strong>Descripción:</strong> {{ $interpretacion->descripcion }}</p>
-                                <p class="card-text"><strong>Usuario:</strong> {{ $interpretacion->user->name ?? 'No especificado' }}</p>
+                                <p class="card-text"><strong>Descripción:</strong> {{ $interpretacion->texto }}</p>
+                                <p class="card-text"><strong>Tipo:</strong> {{ $interpretacion->interpretacionInfo->texto}}</p>
                                 <p class="card-text"><strong>Creado:</strong> {{ $interpretacion->created_at }}</p>
-                                <p class="card-text"><strong>Actualizado:</strong> {{ $interpretacion->updated_at }}</p>
                             </li>
                         @endforeach
                     </ul>
                 </div>
             </div>
         @endif
+        {{-- boton enlace a interpretar --}}
+        <a href="{{ route('interpretar', $muestra)}}" class="btn btn-primary mt-4">Interpretar Muestra</a>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>

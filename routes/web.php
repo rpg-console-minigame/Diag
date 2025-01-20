@@ -31,6 +31,6 @@ Route::get('/crearmuestra',[MuestraController::class, 'MuestraWithData'])->name(
 Route::post('/guardar', [MuestraController::class, 'Guardar'])->name('guardar');
 Route::get('/muestra/{id}', [MuestraController::class, 'muestraInfo'])->name('muestra');
 
-Route::get('/interpretaciones', [InterpretacionController::class, 'index'])->name('interpretaciones');
-Route::post('/interpretar', [InterpretacionController::class, 'create'])->name('interpretar');
+Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->name('interpretar');
+Route::post('/interpretarenter', [InterpretacionController::class, 'create'])->name('interpretarenter');
 
