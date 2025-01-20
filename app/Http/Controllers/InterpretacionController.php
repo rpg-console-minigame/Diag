@@ -11,11 +11,9 @@ use App\Models\Tipo_estudio;
 
 class InterpretacionController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        // temporalmente:
-        $muestra = Muestra::first();
-        //************ */
+        $muestra = Muestra::where('id', $id)->first();
         $interpretaciones = Interpretacion::where('tipo_estudio_id', 
         Tipo_estudio::where('id', 
         Calidad::where('id', $muestra->calidad_id)->first()
@@ -29,6 +27,6 @@ class InterpretacionController extends Controller
         $interpretacionTexto->id_muestra = $request->id_muestra;
         $interpretacionTexto->id_interpretacion = $request->id_interpretacion;
         $interpretacionTexto->save();
-        return redirect()->route('interpretaciones');
+        return redirect()->route('muestra', ['id' => $request->id_muestra]);
     }
 }

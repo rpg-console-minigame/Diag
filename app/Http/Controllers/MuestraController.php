@@ -49,7 +49,7 @@ class MuestraController extends Controller
             $muestra->user = User::where('id', $muestra->user_id)->first();
             $interpretaciones = Interpretacion_texto::where('id_muestra', $id)->get();
             foreach ($interpretaciones as $interpretacion) {
-                $interpretacion->interpretacion = Interpretacion::where('id', $interpretacion->interpretacion_id)->first();
+                $interpretacion->interpretacionInfo = Interpretacion::where('id', $interpretacion->id_interpretacion)->first();
             }
             return view('muestra', ['muestra' => $muestra, 'interpretaciones' => $interpretaciones]);
         } else
