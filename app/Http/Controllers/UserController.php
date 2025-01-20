@@ -14,8 +14,13 @@ class UserController extends Controller
 {
     public function Datos()
     {
-        $sedes = Sede::all();
-        return view('register', ['sedes' => $sedes]);
+        if(session('user')-> is_admin){
+            $sedes = Sede::all();
+            return view('register', ['sedes' => $sedes]);
+        }
+        else {
+            return redirect()->route('welcome');
+        }
     }
 
     public function Guardar(){
