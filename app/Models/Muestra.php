@@ -19,6 +19,7 @@ class muestra extends Model
         'sede_id',
         'tipo_naturaleza_id',
         'calidad_id',
+        'user_id'
     ];
 
     public function Formato_muestra(){
@@ -30,5 +31,8 @@ class muestra extends Model
 
     public function Tipo_naturaleza(){
         return $this->hasOne('App\Models\Tipo_naturaleza');
+    }
+    public function User(){
+        return $this->hasOne('App\Models\User');
     }
 }
