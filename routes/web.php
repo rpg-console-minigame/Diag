@@ -34,3 +34,8 @@ Route::get('/muestra/{id}', [MuestraController::class, 'muestraInfo'])->name('mu
 Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->name('interpretar');
 Route::post('/interpretarenter', [InterpretacionController::class, 'create'])->name('interpretarenter');
 
+Route::get('/prueba', function () {
+    return view('prueba');
+});
+
+
