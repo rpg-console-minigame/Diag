@@ -35,7 +35,11 @@ Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->nam
 Route::post('/interpretarenter', [InterpretacionController::class, 'create'])->name('interpretarenter');
 
 Route::get('/prueba', function () {
-    return view('prueba');
+    return view('admin');
+});
+
+Route::get('/tabla', function () {
+    return view('tablaMuestras');
 });
 
 
