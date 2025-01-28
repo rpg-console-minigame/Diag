@@ -42,4 +42,7 @@ Route::get('/tabla', function () {
     return view('tablaMuestras');
 });
 
+Route::get('/filtrar', function () {
+    return view('filtrar');
+});
 
