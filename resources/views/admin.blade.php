@@ -8,10 +8,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="d-flex flex-column vh-100 bg-light">
-    <!-- Header -->
+    <!-- Quiero que el header tenga un logo a la derecha y a la izquierda el titulo que va a ser "Muestras" y logicamente manteniendo el bootstrap -->
+    <!-- Lo de muestras lo quiero lo maximo a la izquierda que se pueda -->
     <header class="bg-white shadow p-3">
-        <div class="container d-flex justify-content-center align-items-center">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-height: 50px;">
+        <div class="container d-flex justify-content-between align-items-center">
+            <img src="https://via.placeholder.com/150" alt="Logo" style="width: 100px;">
+            <h2 class="m-0">Muestras</h2>
         </div>
     </header>
 

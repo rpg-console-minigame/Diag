@@ -46,4 +46,7 @@ Route::get('/boceto', function () {
     return view('boceto');
 });
 
+Route::get('/filtrar', function () {
+    return view('filtrar');
+});
 
