@@ -65,6 +65,7 @@ class MuestraController extends Controller
         $muestra = new Muestra();
         $muestra->descripcion = $request->input('description');
         $muestra->formato_muestra_id = $request->input('muestra_id');
+        $muestra->textoCalidad = $request->input('textoCalidad');
         $muestra->sede_id = session('user')->sede_id;
         $muestra->tipo_naturaleza_id = $request->input('tipo_naturaleza_id');
         $muestra->calidad_id = $request->input('calidad_id');

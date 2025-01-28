@@ -91,11 +91,19 @@
                 </select>
             </div>
 
+            {{-- textoCalidad --}}
+
+            <div class="form-group">
+                <label for="textoCalidad">Texto Calidad:</label>
+                <input type="text" class="form-control" name="textoCalidad" id="textoCalidad" placeholder="Texto Calidad" required>
+            </div>
+
             <!-- Aumento -->
             <div class="form-group">
                 <label for="aumento">Aumento:</label>
                 <input type="number" class="form-control" name="aumento" placeholder="Aumento" required>
             </div>
+
 
             <!-- Imagen -->
             <div class="form-group">
