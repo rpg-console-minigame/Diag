@@ -34,12 +34,16 @@ Route::get('/muestra/{id}', [MuestraController::class, 'muestraInfo'])->name('mu
 Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->name('interpretar');
 Route::post('/interpretarenter', [InterpretacionController::class, 'create'])->name('interpretarenter');
 
-Route::get('/prueba', function () {
+Route::get('/admin', function () {
     return view('admin');
 });
 
 Route::get('/tabla', function () {
     return view('tablaMuestras');
+});
+
+Route::get('/boceto', function () {
+    return view('boceto');
 });
 
 
