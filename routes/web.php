@@ -50,3 +50,7 @@ Route::get('/filtrar', function () {
     return view('filtrar');
 });
 
+Route::get('/prueba', function () {
+    return view('prueba');
+});
+

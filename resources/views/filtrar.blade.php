@@ -11,8 +11,8 @@
         /* Estilo para posicionar los submenús */
         .dropdown-menu .dropdown-menu {
             position: absolute;
-            top: 0;
-            left: 100%; /* Posiciona el submenú a la derecha */
+            top: 30%;
+            right: 100%; /* Posiciona el submenú a la derecha */
             margin-top: -5px; /* Ajusta el borde superior */
         }
 
@@ -21,24 +21,112 @@
             display: block;
         }
 
-        /* Opcional: añade un indicador visual para los submenús */
-        .dropdown-item.dropdown-toggle::after {
-            content: "›"; /* Flecha indicativa */
-            float: right;
+        .header{
+            position:sticky;
+            top:0;
+            z-index: 1000;
         }
+
+        /* .contenedor {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 40px;
+            max-width: 800px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .muestra {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .muestra:hover {
+            transform: translateY(-10px);
+        }
+
+        .muestra img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        } */
+
+        .contenedor {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            padding: 20px;
+            margin: auto;
+        }
+
+        .muestra {
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease; 
+        }
+
+        .muestra:hover {
+            transform: translateY(-5px);
+        }
+
+        .muestra img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .btnMuestra {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transition: 20s ease;
+            background-color: #333;
+            color: #fff;
+        }
+
+        :root {
+            --medac-light-blue: #0374b5;
+            --medac-white: #FFFFFF;
+            --medac-oscuro: #102f4b;
+        }
+
+        .lightMedac {
+            color: var(--medac-light-blue);
+        }
+
+        .whiteMedac {
+            color: var(--medac-white);
+        }
+
+        .oscuroMedac{
+            background-color: var(--medac-oscuro);
+        }
+
     </style>
+    
 </head>
+
+
 <body class="d-flex flex-column vh-100 bg-light">
-    <header class="bg-white shadow p-3">
+    <header class="bg-white shadow p-3 header">
         <div class="container d-flex justify-content-between align-items-center">
-            <img src="https://via.placeholder.com/150" alt="Logo" style="width: 100px;">
-            <h2 class="m-0">Muestras</h2>
+            <img src="/img/piramide.png" alt="Logo" style="width: 100px;">
+            <h3 class="m-0">Muestras</h2>
         </div>
     </header>
 
     <div class="d-flex flex-grow-1">
         <!-- Sidebar -->
-        <aside class="bg-dark text-white p-4" style="width: 250px;">
+        <aside class="oscuroMedac text-white p-4" style="width: 250px;">
             <div class="mb-5">
                 <!-- Nombre del usuario -->
                 <h4 class="mb-4">{{ Auth::user()->name ?? 'Usuario' }}</h4>
@@ -61,61 +149,100 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-grow-1 d-flex flex-column align-items-start p-4">
+        <main class="flex-grow-1 p-4">
             <!-- Botón Filtrar -->
-            <div class="mb-4">
-                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    Filtrar
+            <div class="d-flex justify-content-end mb-4 ">
+                <button class="btn text-bold dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <h5 class="lightMedac">Filtrar</h5>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Sede</a>
+                        <a class="dropdown-item dropdown-toggle lightMedac" href="#">Sede</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Córdoba</a></li>
-                            <li><a class="dropdown-item" href="#">Málaga</a></li>
-                            <li><a class="dropdown-item" href="#">Madrid</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">Córdoba</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">Málaga</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">Madrid</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Tipo de Naturaleza</a>
+                        <a class="dropdown-item dropdown-toggle lightMedac" href="#">Tipo de Naturaleza</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Presencial</a></li>
-                            <li><a class="dropdown-item" href="#">En línea</a></li>
-                            <li><a class="dropdown-item" href="#">Híbrido</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">Presencial</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">En línea</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">Híbrido</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Formato de Muestra</a>
+                        <a class="dropdown-item dropdown-toggle lightMedac" href="#">Formato de Muestra</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Presencial</a></li>
-                            <li><a class="dropdown-item" href="#">En línea</a></li>
-                            <li><a class="dropdown-item" href="#">Híbrido</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">Presencial</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">En línea</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">Híbrido</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Calidad</a>
+                        <a class="dropdown-item dropdown-toggle lightMedac" href="#">Calidad</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Alta</a></li>
-                            <li><a class="dropdown-item" href="#">Media</a></li>
-                            <li><a class="dropdown-item" href="#">Baja</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">Alta</a></li>
+                            <li><a class="dropdown-item lightMedac " href="#">Media</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">Baja</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Tipo de Estudio</a>
+                        <a class="dropdown-item dropdown-toggle lightMedac" href="#">Tipo de Estudio</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Alta</a></li>
-                            <li><a class="dropdown-item" href="#">Media</a></li>
-                            <li><a class="dropdown-item" href="#">Baja</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">Alta</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">Media</a></li>
+                            <li><a class="dropdown-item lightMedac" href="#">Baja</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
 
-            
+
+
             <div class="flex-grow-1 d-flex justify-content-center align-items-center">
-                <div>
-                    <h1>Bienvenido</h1>
-                    <p>Selecciona una opción del menú para continuar.</p>
+                <div class="contenedor">
+                    <div class="muestra oscuroMedac">
+                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
+                        <div class="btnMuestra whiteMedac">Ver más</div>
+                    </div>
+                    <div class="muestra oscuroMedac">
+                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
+                        <div class="btnMuestra whiteMedac">Ver más</div>
+                    </div>
+                    <div class="muestra oscuroMedac">
+                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
+                        <div class="btnMuestra whiteMedac">Ver más</div>
+                    </div>
+                    <div class="muestra oscuroMedac">
+                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
+                        <div class="btnMuestra whiteMedac">Ver más</div>
+                    </div>
+                    <div class="muestra oscuroMedac">
+                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
+                        <div class="btnMuestra whiteMedac">Ver más</div>
+                    </div>
+                    <div class="muestra oscuroMedac">
+                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
+                        <div class="btnMuestra whiteMedac">Ver más</div>
+                    </div>
+                    <div class="muestra oscuroMedac">
+                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
+                        <div class="btnMuestra whiteMedac">Ver más</div>
+                    </div>
+                    <div class="muestra oscuroMedac">
+                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
+                        <div class="btnMuestra whiteMedac">Ver más</div>
+                    </div>
+                    <div class="muestra oscuroMedac">
+                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
+                        <div class="btnMuestra whiteMedac">Ver más</div>
+                    </div>
+                    <div class="muestra oscuroMedac">
+                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
+                        <div class="btnMuestra whiteMedac">Ver más</div>
+                    </div>
                 </div>
             </div>
         </main>
