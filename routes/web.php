@@ -34,23 +34,23 @@ Route::get('/muestra/{id}', [MuestraController::class, 'muestraInfo'])->name('mu
 Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->name('interpretar');
 Route::post('/interpretarenter', [InterpretacionController::class, 'create'])->name('interpretarenter');
 
-Route::get('/admin', function () {
+Route::get('/Madmin', function () {
     return view('admin');
 });
 
-Route::get('/tabla', function () {
+Route::get('/Mtabla', function () {
     return view('tablaMuestras');
 });
 
-Route::get('/boceto', function () {
+Route::get('/Aboceto', function () {
     return view('boceto');
 });
 
-Route::get('/filtrar', function () {
+Route::get('/Mfiltrar', function () {
     return view('filtrar');
 });
 
-Route::get('/prueba', function () {
+Route::get('/Mprueba', function () {
     return view('prueba');
 });
 
