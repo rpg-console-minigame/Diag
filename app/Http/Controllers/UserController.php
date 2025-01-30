@@ -25,10 +25,10 @@ class UserController extends Controller
     public function mostrarUsuarios()
     {
         if(session('user')->is_admin){
-            $users = User::where('id' , session('user')->id)->get();
-            // add allusers to $users
-            $users ->merge(User::where('id', '!=', session('user')->id)->get());
+            $users = User::where('id', session('user')->id)->get();
 
+            $allUsers = User::where('id', '!=', session('user')->id)->get();
+            $users = $users->merge($allUsers);
             foreach ($users as $user) {
                 $user->sede = Sede::where('id', $user->sede_id)->first();
             }

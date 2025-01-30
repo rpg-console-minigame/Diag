@@ -58,7 +58,7 @@
     {{-- Botón para crear nueva muestra --}}
     <div class="container mt-4">
         <div class="d-flex justify-content-end">
-            <a href="{{ route('crearmuestra') }}" class="btn btn-create btn-lg">Crear Nueva Muestra</a>
+            <a href="{{ route('crearmuestra') }}" class="btn btn-create btn-lg">Crear Nuevo Usuario</a>
         </div>
     </div>
 
