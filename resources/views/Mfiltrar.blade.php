@@ -203,46 +203,19 @@
 
             <div class="flex-grow-1 d-flex justify-content-center align-items-center">
                 <div class="contenedor">
+                    @foreach ($muestras as $muestra)
                     <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
+                        <img src="/uploads/{{$muestra->img->link}}" alt="Imagen de una pirámide">
+                        <div class="card-body whiteMedac">
+                            <h3 class="card-title">AL-BR90</h3>
+                            <p class="card-text">Formato: {{ $muestra->formato->nombre }}</p>
+                            <p class="card-text">Sede: {{ $muestra->sede->nombre }}</p>
+                            <p class="card-text">Tipo de Naturaleza: {{ $muestra->tipo_naturaleza->nombre }}</p>
+                            <p class="card-text">Calidad: {{ $muestra->calidad->nombre }}</p>
+                            <div class="btnMuestra whiteMedac">Ver más</div>
+                        </div>
                     </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </main>
