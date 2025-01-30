@@ -39,7 +39,7 @@ Route::get('/Madmin', function () {
 });
 
 Route::get('/Mtabla', function () {
-    return view('tablaMuestras');
+    return view('MtablaMuestras');
 });
 
 Route::get('/Aboceto', function () {

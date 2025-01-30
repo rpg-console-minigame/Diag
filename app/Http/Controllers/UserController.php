@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\Muestra;
 use App\Models\Formato_muestra;
 use App\Models\Calidad;
+use App\Models\Imagen;
+
 
 class UserController extends Controller
 {
@@ -58,8 +60,9 @@ class UserController extends Controller
                 $muestra->sede = Sede::where('id', $muestra->sede_id)->first();
                 $muestra->tipo_naturaleza = Tipo_naturaleza::where('id', $muestra->tipo_naturaleza_id)->first();
                 $muestra->calidad = Calidad::where('id', $muestra->calidad_id)->first();
+                $muestra->img = Imagen::where('muestra_id', $muestra->id)->first();
             }
-            return view('welcome', ['muestras' => $muestras]);
+            return view('Mfiltrar', ['muestras' => $muestras]);
         }
     }
     public function logout()
