@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vista con Logo y Menú</title>
-    
+    <title>Antonio Despedido</title>
+    <!-- Carga Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -112,6 +112,11 @@
                     <li class="nav-item mb-2">
                         <a href="" class="nav-link text-white">Perfil</a>
                     </li>
+                    @if (session("user")->is_admin)
+                        <li class="nav-item mb-2">
+                            <a href="{{route("registro")}}" class="nav-link text-white">Crear Usuario</a>
+                        </li>
+                    @endif
                     <li class="nav-item mb-2">
                         <a href="{{route("logout")}}" class="nav-link text-white">Cerrar Sesión</a>
                     </li>
@@ -181,7 +186,7 @@
                     <div class="muestra oscuroMedac">
                         <img src="/uploads/{{$muestra->img->link}}" alt="Imagen de una pirámide">
                         <div class="card-body whiteMedac">
-                            <h3 class="card-title">AL-BR90</h3>
+                            <h3 class="card-title">{{$muestra->sigla}}</h3>
                             <p class="card-text">Formato: {{ $muestra->formato->nombre }}</p>
                             <p class="card-text">Sede: {{ $muestra->sede->nombre }}</p>
                             <p class="card-text">Tipo de Naturaleza: {{ $muestra->tipo_naturaleza->nombre }}</p>
