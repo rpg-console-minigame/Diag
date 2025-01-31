@@ -186,7 +186,9 @@
                             <p class="card-text">Sede: {{ $muestra->sede->nombre }}</p>
                             <p class="card-text">Tipo de Naturaleza: {{ $muestra->tipo_naturaleza->nombre }}</p>
                             <p class="card-text">Calidad: {{ $muestra->calidad->nombre }}</p>
-                            <a href="{{ route('muestra', ['id' => $muestra->id]) }}"><div class="btnMuestra whiteMedac">Ver más</div></a>
+                            <a href="{{ route('muestra', ['id' => $muestra->id]) }}" target="_blank">
+                                <div class="btnMuestra whiteMedac">Ver más</div>
+                            </a>
                         </div>
                     </div>
                     @endforeach
@@ -194,7 +196,7 @@
             </div>
 
             <div class="d-flex justify-content-end">
-                <a class="btn oscuroMedac text-white p-3">Crear Muestra</a>
+                <a class="btn oscuroMedac text-white p-3" href="{{route("crearmuestra")}}">Crear Muestra</a>
             </div>
 
         </main>
