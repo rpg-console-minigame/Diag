@@ -27,9 +27,8 @@ class UserController extends Controller
     public function mostrarUsuarios()
     {
         if(session('user')->is_admin){
-            $users = User::where('id', session('user')->id)->get();
-
-            $allUsers = User::where('id', '!=', session('user')->id)->get();
+            $users = User::where('id', session('user')->getKey())->get();
+            $allUsers = User::where('id', '!=', session('user')->getKey())->get();
             $users = $users->merge($allUsers);
             foreach ($users as $user) {
                 $user->sede = Sede::where('id', $user->sede_id)->first();
@@ -84,6 +83,7 @@ class UserController extends Controller
                     $muestra->tipo_naturaleza = Tipo_naturaleza::where('id', $muestra->tipo_naturaleza_id)->first();
                     $muestra->calidad = Calidad::where('id', $muestra->calidad_id)->first();
                     $muestra->img = Imagen::where('muestra_id', $muestra->id)->first();
+                    $muestra->sigla = $muestra->sede->siglas ." ". $muestra->tipo_naturaleza->sigla .$muestra->id;
                 }
                 return view('Mfiltrar', ['muestras' => $muestras]);
             } else {
