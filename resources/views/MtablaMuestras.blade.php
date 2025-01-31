@@ -15,7 +15,7 @@
             <table class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr class="text-center">
-                        <th>Acciones</th>
+                        
                         <th>ID</th>
                         <th>Descripción</th>
                         <th>Formato de Muestra</th>
@@ -23,14 +23,13 @@
                         <th>Tipo Naturaleza</th>
                         <th>Calidad</th>
                         <th>Tipo de Estudio</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     
                     <tr class="text-center">
-                        <td>
-                            <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(1, 'Circular', 'Orgánico', 'Sede 1', 'Naturaleza 1', 'Alta', 'Estudio 1')">Editar</button>
-                        </td>
+                        
                         <td>1</td>
                         <td>Circular</td>
                         <td>Orgánico</td>
@@ -38,11 +37,12 @@
                         <td>Naturaleza 1</td>
                         <td>Alta</td>
                         <td>Estudio 1</td>
+                        <td>
+                            <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(1, 'Circular', 'Orgánico', 'Sede 1', 'Naturaleza 1', 'Alta', 'Estudio 1')">Editar</button>
+                        </td>
                     </tr>
                     <tr class="text-center">
-                        <td>
-                            <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(2, 'Triangular', 'Inorgánico', 'Sede 2', 'Naturaleza 2', 'Media', 'Estudio 2')">Editar</button>
-                        </td>
+                        
                         <td>2</td>
                         <td>Triangular</td>
                         <td>Inorgánico</td>
@@ -50,11 +50,12 @@
                         <td>Naturaleza 2</td>
                         <td>Media</td>
                         <td>Estudio 2</td>
+                        <td>
+                            <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(2, 'Triangular', 'Inorgánico', 'Sede 2', 'Naturaleza 2', 'Media', 'Estudio 2')">Editar</button>
+                        </td>
                     </tr>
                     <tr class="text-center">
-                        <td>
-                            <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(3, 'Rectangular', 'Orgánico', 'Sede 3', 'Naturaleza 3', 'Baja', 'Estudio 3')">Editar</button>
-                        </td>
+                        
                         <td>3</td>
                         <td>Rectangular</td>
                         <td>Orgánico</td>
@@ -62,6 +63,9 @@
                         <td>Naturaleza 3</td>
                         <td>Baja</td>
                         <td>Estudio 3</td>
+                        <td>
+                            <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(3, 'Rectangular', 'Orgánico', 'Sede 3', 'Naturaleza 3', 'Baja', 'Estudio 3')">Editar</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

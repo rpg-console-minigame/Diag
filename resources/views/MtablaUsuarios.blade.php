@@ -11,7 +11,7 @@
 
     <main class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
         <div class="container">
-            <h1 class="mb-4">Listado de Muestras</h1>
+            <h1 class="mb-4">Listado de Usuarios</h1>
             <table class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr class="text-center">
