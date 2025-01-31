@@ -149,9 +149,11 @@
         <main class="flex-grow-1 p-4">
             <!-- Botón Filtrar -->
             <div class="d-flex justify-content-end mb-4 ">
+                
                 <button class="btn text-bold dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     <h5 class="lightMedac">Filtrar</h5>
                 </button>
+                
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li class="dropdown-submenu">
                         <a class="dropdown-item dropdown-toggle lightMedac" href="#">Sede</a>
@@ -195,6 +197,7 @@
                     </li>
                 </ul>
             </div>
+            
 
 
 
@@ -215,6 +218,11 @@
                     @endforeach
                 </div>
             </div>
+
+            <div class="d-flex justify-content-end">
+                <a class="btn oscuroMedac text-white p-3">Crear Muestra</a>
+            </div>
+            
         </main>
     </div>
 
