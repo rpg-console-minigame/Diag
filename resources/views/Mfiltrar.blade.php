@@ -212,7 +212,7 @@
                             <p class="card-text">Sede: {{ $muestra->sede->nombre }}</p>
                             <p class="card-text">Tipo de Naturaleza: {{ $muestra->tipo_naturaleza->nombre }}</p>
                             <p class="card-text">Calidad: {{ $muestra->calidad->nombre }}</p>
-                            <div class="btnMuestra whiteMedac">Ver más</div>
+                            <a href="{{ route('muestra', ['id' => $muestra->id]) }}"><div class="btnMuestra whiteMedac">Ver más</div></a>
                         </div>
                     </div>
                     @endforeach
