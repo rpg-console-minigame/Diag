@@ -19,6 +19,8 @@ use App\Models\User;
 
 Route::get('/', [UserController::class, 'welcomeWittData'])->name('welcome');
 
+Route::get('/editarUsuarios', [UserController::class, 'mostrarUsuarios'])->name('editarUsuarios');
+
 Route::get('/login',[UserController::class, 'index'])->name('login');
 Route::post('/loginenter',[UserController::class, 'login'])->name('loginenter');
 

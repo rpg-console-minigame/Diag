@@ -26,6 +26,7 @@
                 <p class="card-text"><strong>Sede:</strong> {{ $muestra->sede->nombre ?? 'No especificada' }}</p>
                 <p class="card-text"><strong>Tipo de Naturaleza:</strong> {{ $muestra->tipo_naturaleza->nombre ?? 'No especificado' }}</p>
                 <p class="card-text"><strong>Calidad:</strong> {{ $muestra->calidad->nombre ?? 'No especificada' }}</p>
+                <p class="card-text"><strong>Calidad info:</strong> {{ $muestra->textoCalidad ?? 'No especificado' }}</p>
                 <p class="card-text"><strong>Usuario:</strong> {{ $muestra->user->name ?? 'No especificado' }}</p>
                 <p class="card-text"><strong>Creado:</strong> {{ $muestra->created_at }}</p>
                 <p class="card-text"><strong>Actualizado:</strong> {{ $muestra->updated_at }}</p>

@@ -120,5 +120,19 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+
+
+        $user_name = env('ADMIN_NAME');
+        $user_email = env('ADMIN_EMAIL');
+        $user_password = env('ADMIN_PASSWORD');
+
+        $user = \App\Models\User::create([
+            'name' => $user_name,
+            'email' => $user_email,
+            'password' => bcrypt($user_password),
+            'is_admin' => true,
+            'sede_id' => 1
+        ]);
     }
 }
