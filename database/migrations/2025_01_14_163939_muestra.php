@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('muestra', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion');
+            $table->string('textoCalidad');
             $table->unsignedBigInteger('formato_muestra_id');
             $table->foreign('formato_muestra_id')->references('id')->on('formato_muestra');
             $table->unsignedBigInteger('sede_id');
