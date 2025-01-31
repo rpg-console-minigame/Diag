@@ -40,7 +40,8 @@ class MuestraController extends Controller
         // Route::get('/muestra/{id}', [MuestraController::class, 'muestraInfo'])->name('muestra');
         $muestra = Muestra::where('id', $id)->first();
         // si $muestra id_user es el mismo que el id del usuario logueado
-        if ($muestra->user_id == session('user')->getAuthIdentifier()) {
+        if ($muestra->user_id == session('user')->getAuthIdentifier()
+            || session("user")->is_admin == true) {
             $muestra->imagen = Imagen::where('muestra_id', $id)->first();
             $muestra->formato = Formato_muestra::where('id', $muestra->formato_muestra_id)->first();
             $muestra->sede = Sede::where('id', $muestra->sede_id)->first();

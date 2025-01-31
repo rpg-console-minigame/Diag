@@ -133,16 +133,13 @@
                 <!-- Menú -->
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
-                        <a href="" class="nav-link text-white">Muestras</a>
+                        <a href="{{route("welcome")}}" class="nav-link text-white">Muestras</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="" class="nav-link text-white">Perfil</a>
                     </li>
-                    <li class="nav-item">
-                        <form method="POST" action="">
-                            @csrf
-                            <button type="submit" class="btn btn-link nav-link text-white text-start">Cerrar Sesión</button>
-                        </form>
+                    <li class="nav-item mb-2">
+                        <a href="{{route("logout")}}" class="nav-link text-white">Cerrar Sesión</a>
                     </li>
                 </ul>
             </div>
@@ -203,46 +200,19 @@
 
             <div class="flex-grow-1 d-flex justify-content-center align-items-center">
                 <div class="contenedor">
+                    @foreach ($muestras as $muestra)
                     <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
+                        <img src="/uploads/{{$muestra->img->link}}" alt="Imagen de una pirámide">
+                        <div class="card-body whiteMedac">
+                            <h3 class="card-title">AL-BR90</h3>
+                            <p class="card-text">Formato: {{ $muestra->formato->nombre }}</p>
+                            <p class="card-text">Sede: {{ $muestra->sede->nombre }}</p>
+                            <p class="card-text">Tipo de Naturaleza: {{ $muestra->tipo_naturaleza->nombre }}</p>
+                            <p class="card-text">Calidad: {{ $muestra->calidad->nombre }}</p>
+                            <a href="{{ route('muestra', ['id' => $muestra->id]) }}"><div class="btnMuestra whiteMedac">Ver más</div></a>
+                        </div>
                     </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
-                    <div class="muestra oscuroMedac">
-                        <img src="/img/piramide.png" alt="Imagen de una pirámide">
-                        <div class="btnMuestra whiteMedac">Ver más</div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </main>
