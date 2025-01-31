@@ -36,27 +36,16 @@ Route::get('/muestra/{id}', [MuestraController::class, 'muestraInfo'])->name('mu
 Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->name('interpretar');
 Route::post('/interpretarenter', [InterpretacionController::class, 'create'])->name('interpretarenter');
 
-Route::get('/Madmin', function () {
-    return view('admin');
-});
-
-Route::get('/Mtabla', function () {
-    return view('MtablaMuestras');
-});
-
-Route::get('/MtablaUser', function () {
-    return view('MtablaUsuarios');
-});
-
-Route::get('/Aboceto', function () {
-    return view('boceto');
-});
 
 Route::get('/Mfiltrar', function () {
-    return view('filtrar');
+    return view('Mfiltrar');
 });
 
 Route::get('/Mprueba', function () {
     return view('prueba');
+});
+
+Route::get('/Usuarios', function () {
+    return view('Usuarios');
 });
 
