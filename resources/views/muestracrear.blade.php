@@ -52,7 +52,11 @@
                     @endforeach
                 </select>
             </div>
-
+            {{-- Texto calidad --}}
+            <div class="form-group">
+                <label for="textoCalidad">Descripción Calidad:</label>
+                <input type="text" class="form-control" name="textoCalidad" id="textoCalidad" placeholder="Texto Calidad" required>
+            </div>
             <!-- Calidad -->
             <div class="form-group">
                 <label for="calidad">Calidad:</label>

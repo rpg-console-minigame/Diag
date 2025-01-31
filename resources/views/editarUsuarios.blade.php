@@ -6,7 +6,7 @@
 
     <title>Laravel</title>
 
-    <!-- Bootstrap CSS -->
+    
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -42,7 +42,7 @@
 </head>
 
 <body>
-    {{-- Header con datos del usuario y logout --}}
+   
     <div class="container mt-4">
         <div class="header d-flex justify-content-between align-items-center">
             <div>
@@ -55,17 +55,15 @@
         </div>
     </div>
 
-    {{-- Botón para crear nueva muestra --}}
+   
     <div class="container mt-4">
         <div class="d-flex justify-content-end">
             <a href="{{ route('crearmuestra') }}" class="btn btn-create btn-lg">Crear Nuevo Usuario</a>
         </div>
     </div>
 
-    {{-- Botón editar usuario --}}
+   
     
-
-    {{-- Lista de muestras --}}
     <div class="container mt-4">
         <h2 class="mb-4">Usuarios</h2>
         <div class="row">
@@ -80,14 +78,14 @@
                     </div>
                     <div class="container mt-4">
                         <div class="d-flex justify-content-end">
-                            <!-- Botón para abrir el modal -->
+                            
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarUsuarioModal">
                                 Editar Usuario
                             </button>
                         </div>
                     </div>
                 
-                    <!-- Modal -->
+                    
                     <div class="modal fade" id="editarUsuarioModal" tabindex="-1" aria-labelledby="editarUsuarioLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -121,7 +119,7 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

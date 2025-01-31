@@ -41,7 +41,11 @@ Route::get('/Madmin', function () {
 });
 
 Route::get('/Mtabla', function () {
-    return view('tablaMuestras');
+    return view('MtablaMuestras');
+});
+
+Route::get('/MtablaUser', function () {
+    return view('MtablaUsuarios');
 });
 
 Route::get('/Aboceto', function () {
