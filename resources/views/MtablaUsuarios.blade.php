@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabla Muestras</title>
-   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="d-flex flex-column vh-100 bg-light">
 
     <main class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
         <div class="container">
-            <h1 class="mb-4">Listado de Usuarios</h1>
+        <h1 class="mb-4">Listado de Usuarios</h1>
+
+            <div>
+                <button class="btn btn-dark d-flex justify-content-end p-3" data-bs-toggle="modal" data-bs-target="#crearUsuarioModal">Crear Usuario</button>
+            </div>
+
             <table class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr class="text-center">
@@ -88,7 +92,64 @@
             </div>
         </div>
     </div>
+    
 
+    <div class="modal fade" id="crearUsuarioModal" tabindex="-1" aria-labelledby="crearUsuarioModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="crearUsuarioModalLabel">Registrar Nuevo Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="crearUsuarioForm">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="correo" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="correo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contrasena" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="contrasena" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="repetirContrasena" class="form-label">Repetir Contraseña</label>
+                            <input type="password" class="form-control" id="repetirContrasena" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sede" class="form-label">Sede</label>
+                            <input type="text" class="form-control" id="sede" required>
+                        </div>
+                        <button type="submit" class="btn btn-dark">Registrarse</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('crearUsuarioForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const correo = document.getElementById('correo').value;
+            const contrasena = document.getElementById('contrasena').value;
+            const repetirContrasena = document.getElementById('repetirContrasena').value;
+            const sede = document.getElementById('sede').value;
+
+            if (contrasena !== repetirContrasena) {
+                alert('Las contraseñas no coinciden.');
+                return;
+            }
+
+            alert(`Usuario registrado: \nNombre: ${nombre}\nCorreo: ${correo}\nSede: ${sede}`);
+            
+            const modal = bootstrap.Modal.getInstance(document.getElementById('crearUsuarioModal'));
+            modal.hide();
+        });
+    </script>
     <script>
         function setEditData(id, descripcion, formato, sede, naturaleza, calidad, estudio) {
             document.getElementById('muestraID').value = id;
