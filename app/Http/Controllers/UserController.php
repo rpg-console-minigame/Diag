@@ -107,9 +107,10 @@ class UserController extends Controller
     public function usersWithData()
     {
         $users = User::all();
+        $sedes = Sede::all();
         foreach ($users as $user) {
             $user->sede = Sede::where('id', $user->sede_id)->first();
         }
-        return view('Usuarios', ['users' => $users]);
+        return view('Usuarios', ['users' => $users, 'sedes'=> $sedes]);
     }
 }
