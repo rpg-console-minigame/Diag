@@ -133,13 +133,13 @@
                 <!-- Menú -->
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
-                        <a href="" class="nav-link text-white">Muestras</a>
+                        <a href="{{route("welcome")}}" class="nav-link text-white">Muestras</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="" class="nav-link text-white">Perfil</a>
                     </li>
-                    <li class="nav-item">
-                            <a href="{{route("logout")}}"><button type="submit" class="btn btn-link nav-link text-white text-start" >Cerrar Sesión</button></a>
+                    <li class="nav-item mb-2">
+                        <a href="{{route("logout")}}" class="nav-link text-white">Cerrar Sesión</a>
                     </li>
                 </ul>
             </div>
