@@ -104,4 +104,12 @@ class UserController extends Controller
         session()->forget('user');
         return redirect()->route('login');
     }
+
+    public function delete($id){
+        if(session('user')->is_admin){
+            $user = User::where('id', $id)->first();
+            $user->delete();
+            return redirect()->route('editarUsuarios');
+        }
+    }
 }
