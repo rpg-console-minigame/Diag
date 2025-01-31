@@ -139,10 +139,7 @@
                         <a href="" class="nav-link text-white">Perfil</a>
                     </li>
                     <li class="nav-item">
-                        <form method="POST" action="">
-                            @csrf
-                            <button type="submit" class="btn btn-link nav-link text-white text-start">Cerrar Sesión</button>
-                        </form>
+                            <a href="{{route("logout")}}"><button type="submit" class="btn btn-link nav-link text-white text-start" >Cerrar Sesión</button></a>
                     </li>
                 </ul>
             </div>
