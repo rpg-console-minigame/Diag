@@ -24,6 +24,8 @@ Route::get('/editarUsuarios', [UserController::class, 'mostrarUsuarios'])->name(
 Route::get('/login',[UserController::class, 'index'])->name('login');
 Route::post('/loginenter',[UserController::class, 'login'])->name('loginenter');
 
+Route::get('/usuarios', [UserController::class, 'usersWithData'])->name('usuarios');
+
 Route::get('/registro',[UserController::class, 'Datos'])->name('registro');
 Route::post('/registroenter',[UserController::class, 'Guardar'])->name('registroenter');
 
@@ -37,6 +39,7 @@ Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->nam
 Route::post('/interpretarenter', [InterpretacionController::class, 'create'])->name('interpretarenter');
 
 
+
 Route::get('/Mfiltrar', function () {
     return view('Mfiltrar');
 });
@@ -45,7 +48,4 @@ Route::get('/Mprueba', function () {
     return view('prueba');
 });
 
-Route::get('/Usuarios', function () {
-    return view('Usuarios');
-});
 

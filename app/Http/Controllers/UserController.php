@@ -104,4 +104,12 @@ class UserController extends Controller
         session()->forget('user');
         return redirect()->route('login');
     }
+    public function usersWithData()
+    {
+        $users = User::all();
+        foreach ($users as $user) {
+            $user->sede = Sede::where('id', $user->sede_id)->first();
+        }
+        return view('Usuarios', ['users' => $users]);
+    }
 }

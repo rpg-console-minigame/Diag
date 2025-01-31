@@ -139,125 +139,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ( $users as $user)
                     
                     <tr class="text-center">
-                        
-                        <td>1</td>
-                        <td>Antonio Reyes</td>
-                        <td>antonio@gmail.com</td>
-                        <td>Cordoba</td>
+                        <td>{{$user->id}}</td>
+                        <td>{{$user->name}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->sede->nombre}}</td>
                         <td>
                             <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(1, 'Circular', 'Orgánico', 'Sede 1', 'Naturaleza 1', 'Alta', 'Estudio 1')">Editar</button>
                         </td>
                     </tr>
-                    <tr class="text-center">
-                        <td>2</td>
-                        <td>Alejandro Quintero</td>
-                        <td>aqp@gmail.com</td>
-                        <td>Malaga</td>
-                        <td>
-                            <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(2, 'Triangular', 'Inorgánico', 'Sede 2', 'Naturaleza 2', 'Media', 'Estudio 2')">Editar</button>
-                        </td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>3</td>
-                        <td>Alex Jefe</td>
-                        <td>eljefe@gmail.com</td>
-                        <td>Cordoba</td>
-                        <td>
-                            <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(3, 'Rectangular', 'Orgánico', 'Sede 3', 'Naturaleza 3', 'Baja', 'Estudio 3')">Editar</button>
-                        </td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>2</td>
-                        <td>Alejandro Quintero</td>
-                        <td>aqp@gmail.com</td>
-                        <td>Malaga</td>
-                        <td>
-                            <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(2, 'Triangular', 'Inorgánico', 'Sede 2', 'Naturaleza 2', 'Media', 'Estudio 2')">Editar</button>
-                        </td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>3</td>
-                        <td>Alex Jefe</td>
-                        <td>eljefe@gmail.com</td>
-                        <td>Cordoba</td>
-                        <td>
-                            <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(3, 'Rectangular', 'Orgánico', 'Sede 3', 'Naturaleza 3', 'Baja', 'Estudio 3')">Editar</button>
-                        </td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>2</td>
-                        <td>Alejandro Quintero</td>
-                        <td>aqp@gmail.com</td>
-                        <td>Malaga</td>
-                        <td>
-                            <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(2, 'Triangular', 'Inorgánico', 'Sede 2', 'Naturaleza 2', 'Media', 'Estudio 2')">Editar</button>
-                        </td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>3</td>
-                        <td>Alex Jefe</td>
-                        <td>eljefe@gmail.com</td>
-                        <td>Cordoba</td>
-                        <td>
-                            <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(3, 'Rectangular', 'Orgánico', 'Sede 3', 'Naturaleza 3', 'Baja', 'Estudio 3')">Editar</button>
-                        </td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>2</td>
-                        <td>Alejandro Quintero</td>
-                        <td>aqp@gmail.com</td>
-                        <td>Malaga</td>
-                        <td>
-                            <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(2, 'Triangular', 'Inorgánico', 'Sede 2', 'Naturaleza 2', 'Media', 'Estudio 2')">Editar</button>
-                        </td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>3</td>
-                        <td>Alex Jefe</td>
-                        <td>eljefe@gmail.com</td>
-                        <td>Cordoba</td>
-                        <td>
-                            <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(3, 'Rectangular', 'Orgánico', 'Sede 3', 'Naturaleza 3', 'Baja', 'Estudio 3')">Editar</button>
-                        </td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>2</td>
-                        <td>Alejandro Quintero</td>
-                        <td>aqp@gmail.com</td>
-                        <td>Malaga</td>
-                        <td>
-                            <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(2, 'Triangular', 'Inorgánico', 'Sede 2', 'Naturaleza 2', 'Media', 'Estudio 2')">Editar</button>
-                        </td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>3</td>
-                        <td>Alex Jefe</td>
-                        <td>eljefe@gmail.com</td>
-                        <td>Cordoba</td>
-                        <td>
-                            <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(3, 'Rectangular', 'Orgánico', 'Sede 3', 'Naturaleza 3', 'Baja', 'Estudio 3')">Editar</button>
-                        </td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>2</td>
-                        <td>Alejandro Quintero</td>
-                        <td>aqp@gmail.com</td>
-                        <td>Malaga</td>
-                        <td>
-                            <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(2, 'Triangular', 'Inorgánico', 'Sede 2', 'Naturaleza 2', 'Media', 'Estudio 2')">Editar</button>
-                        </td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>3</td>
-                        <td>Alex Jefe</td>
-                        <td>eljefe@gmail.com</td>
-                        <td>Cordoba</td>
-                        <td>
-                            <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="setEditData(3, 'Rectangular', 'Orgánico', 'Sede 3', 'Naturaleza 3', 'Baja', 'Estudio 3')">Editar</button>
-                        </td>
-                    </tr>
+                    @endforeach
+
                 </tbody>
             </table>
         </div>
