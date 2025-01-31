@@ -44,6 +44,10 @@ Route::get('/Mtabla', function () {
     return view('MtablaMuestras');
 });
 
+Route::get('/MtablaUser', function () {
+    return view('MtablaUsuarios');
+});
+
 Route::get('/Aboceto', function () {
     return view('boceto');
 });

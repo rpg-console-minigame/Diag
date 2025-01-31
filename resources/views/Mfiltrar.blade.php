@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vista con Logo y Menú</title>
-    <!-- Carga Bootstrap -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        /* Estilo para posicionar los submenús */
+        
         .dropdown-menu .dropdown-menu {
             position: absolute;
             top: 30%;
-            right: 100%; /* Posiciona el submenú a la derecha */
-            margin-top: -5px; /* Ajusta el borde superior */
+            right: 100%; 
+            margin-top: -5px;
         }
 
-        /* Muestra el submenú al hacer hover */
+        
         .dropdown-menu li:hover > .dropdown-menu {
             display: block;
         }
@@ -26,32 +26,6 @@
             top:0;
             z-index: 1000;
         }
-
-        /* .contenedor {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 40px;
-            max-width: 800px;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .muestra {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .muestra:hover {
-            transform: translateY(-10px);
-        }
-
-        .muestra img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-        } */
 
         .contenedor {
             display: grid;
@@ -125,12 +99,12 @@
     </header>
 
     <div class="d-flex flex-grow-1">
-        <!-- Sidebar -->
+     
         <aside class="oscuroMedac text-white p-4" style="width: 250px;">
             <div class="mb-5">
-                <!-- Nombre del usuario -->
+               
                 <h4 class="mb-4">{{ Auth::user()->name ?? 'Usuario' }}</h4>
-                <!-- Menú -->
+          
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
                         <a href="{{route("welcome")}}" class="nav-link text-white">Muestras</a>
@@ -145,9 +119,9 @@
             </div>
         </aside>
 
-        <!-- Main Content -->
+   
         <main class="flex-grow-1 p-4">
-            <!-- Botón Filtrar -->
+          
             <div class="d-flex justify-content-end mb-4 ">
                 
                 <button class="btn text-bold dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -222,11 +196,11 @@
             <div class="d-flex justify-content-end">
                 <a class="btn oscuroMedac text-white p-3">Crear Muestra</a>
             </div>
-            
+
         </main>
     </div>
 
-    <!-- Carga Bootstrap JS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
