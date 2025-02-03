@@ -97,6 +97,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card:hover {
+            transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
         .card-header {
@@ -139,7 +140,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .list-group-item:hover {
-            transform: translateY(-3px);
+            
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
         h1 {
