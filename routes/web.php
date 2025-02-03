@@ -46,8 +46,7 @@ Route::get('/Mprueba', function () {
     return view('prueba');
 });
 
-
-Route::get('/muestrasDentro', function () {
-    return view('MuestrasDentro');
+Route::get('/detallesmuestra', function () {
+    return view('MdetallesMuestra');
 });
 
