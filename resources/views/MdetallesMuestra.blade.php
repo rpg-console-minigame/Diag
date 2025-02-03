@@ -199,7 +199,7 @@
                 <div class="card-header text-center">Información General</div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-hover text-center">
+                            <table class="table table-bordered  text-center">
                                 <thead class="table-light">
                                     <tr>
                                         <th>Descripción</th>
