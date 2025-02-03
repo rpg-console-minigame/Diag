@@ -97,7 +97,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card:hover {
-            transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
         .card-header {
@@ -200,7 +199,7 @@
                 <div class="card-header text-center">Información General</div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-hover text-center">
+                            <table class="table table-bordered  text-center">
                                 <thead class="table-light">
                                     <tr>
                                         <th>Descripción</th>
