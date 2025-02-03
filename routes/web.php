@@ -19,12 +19,11 @@ use App\Models\User;
 
 Route::get('/', [UserController::class, 'welcomeWittData'])->name('welcome');
 
-Route::get('/editarUsuarios', [UserController::class, 'mostrarUsuarios'])->name('editarUsuarios');
-
 Route::get('/login',[UserController::class, 'index'])->name('login');
 Route::post('/loginenter',[UserController::class, 'login'])->name('loginenter');
 
-Route::get('/registro',[UserController::class, 'Datos'])->name('registro');
+Route::get('/usuarios', [UserController::class, 'usersWithData'])->name('usuarios');
+Route::post('/usuarioupdate/{id}', [UserController::class, 'update'])->name('usuarioUpdate');
 Route::post('/registroenter',[UserController::class, 'Guardar'])->name('registroenter');
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
@@ -37,6 +36,7 @@ Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->nam
 Route::post('/interpretarenter', [InterpretacionController::class, 'create'])->name('interpretarenter');
 
 
+
 Route::get('/Mfiltrar', function () {
     return view('Mfiltrar');
 });
@@ -45,7 +45,4 @@ Route::get('/Mprueba', function () {
     return view('prueba');
 });
 
-Route::get('/Usuarios', function () {
-    return view('Usuarios');
-});
 
