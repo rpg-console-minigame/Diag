@@ -49,3 +49,7 @@ Route::get('/Usuarios', function () {
     return view('Usuarios');
 });
 
+Route::get('/muestrasDentro', function () {
+    return view('MuestrasDentro');
+});
+
