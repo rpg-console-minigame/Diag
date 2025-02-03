@@ -170,48 +170,38 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="editarModalLabel{{ $user->id }}">Editar Usuario</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="editarForm{{ $user->id }}" action="{{ route('usuarioUpdate', $user->id) }}"
-                                method="POST">
+                            <form id="editarForm{{ $user->id }}" action="{{ route('usuarioUpdate', $user->id) }}" method="POST">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" name="name"
-                                        value="{{ $user->name }}">
+                                    <input type="text" class="form-control" name="name" value="{{ $user->name }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="text" class="form-control" name="email"
-                                        value="{{ $user->email }}">
+                                    <input type="text" class="form-control" name="email" value="{{ $user->email }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="contrasena" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" name="contrasena"
-                                        placeholder="Contraseña">
+                                    <input type="password" class="form-control" name="contrasena" placeholder="Contraseña">
                                 </div>
                                 <div class="mb-3">
                                     <label for="contrasena" class="form-label">Confirmar Contraseña</label>
-                                    <input type="password" class="form-control" name="contrasena1"
-                                        placeholder="Contraseña">
+                                    <input type="password" class="form-control" name="contrasena1" placeholder="Contraseña">
                                 </div>
                                 <div class="mb-3">
                                     <label for="sede" class="form-label">Sede</label>
                                     <select class="form-select" name="sede_id">
                                         @foreach ($sedes as $sede)
-                                            <option value="{{ $sede->id }}"
-                                                {{ $sede->id == $user->sede_id ? 'selected' : '' }}>
-                                                {{ $sede->nombre }}</option>
+                                            <option value="{{ $sede->id }}" {{ $sede->id == $user->sede_id ? 'selected' : '' }}>{{ $sede->nombre }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-dark">Guardar Cambios</button>
                             </form>
-
-                            <form id="eliminarForm{{ $user->id }}"
-                                action="{{ route('usuarioDelete', $user->id) }}" method="POST">
+                            <form id="eliminarForm{{ $user->id }}" action="{{ route('usuarioDelete', $user->id) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-danger">Eliminar Usuario</button>
                             </form>
@@ -268,7 +258,7 @@
 </body>
 
 </html>
-@if (session('error'))
+@if(session('error'))
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             alert("{{ session('error') }}");
