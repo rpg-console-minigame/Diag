@@ -146,8 +146,7 @@
                                 <td>{{ $user->sede->nombre }}</td>
                                 <td>
                                     <button class="btn oscuroMedac text-white btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#editarModal{{ $user->id }}"
-                                        onclick="setEditData(1, 'Circular', 'Orgánico', 'Sede 1', 'Naturaleza 1', 'Alta', 'Estudio 1')">Editar</button>
+                                        data-bs-target="#editarModal{{ $user->id }}">Editar</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -162,38 +161,6 @@
             </div>
 
         </main>
-        <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editarModalLabel">Editar Usuario</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="editarForm">
-                            <div class="mb-3">
-                                <label for="muestraID" class="form-label">ID del Usuario</label>
-                                <input type="text" class="form-control" id="muestraID" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="descripcion" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="descripcion" placeholder="Descripción">
-                            </div>
-                            <div class="mb-3">
-                                <label for="formato" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="formato"
-                                    placeholder="Formato de Muestra">
-                            </div>
-                            <div class="mb-3">
-                                <label for="sede" class="form-label">Sede</label>
-                                <input type="text" class="form-control" id="sede" placeholder="Sede">
-                            </div>
-                            <button type="submit" class="btn btn-dark">Guardar Cambios</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         @foreach ($users as $user)
             {{-- modales para editar --}}
@@ -206,22 +173,27 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="editarForm{{ $user->id }}">
+                            <form id="editarForm{{ $user->id }}" action="{{ route('usuarioUpdate', $user->id) }}" method="POST">
+                                @csrf
                                 <div class="mb-3">
-                                    <label for="muestraID" class="form-label">ID del Usuario</label>
-                                    <input type="text" class="form-control" id="muestraID{{ $user->id }}" value="{{ $user->id }}" readonly>
+                                    <label for="name" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" name="name" value="{{ $user->name }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="descripcion" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="descripcion{{ $user->id }}" value="{{ $user->name }}" placeholder="Descripción">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" class="form-control" name="email" value="{{ $user->email }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="formato" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="formato{{ $user->id }}" value="{{ $user->email }}" placeholder="Formato de Muestra">
+                                    <label for="contrasena" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" name="contrasena" placeholder="Contraseña">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contrasena" class="form-label">Confirmar Contraseña</label>
+                                    <input type="password" class="form-control" name="contrasena1" placeholder="Contraseña">
                                 </div>
                                 <div class="mb-3">
                                     <label for="sede" class="form-label">Sede</label>
-                                    <select class="form-select" id="sede{{ $user->id }}">
+                                    <select class="form-select" name="sede_id">
                                         @foreach ($sedes as $sede)
                                             <option value="{{ $sede->id }}" {{ $sede->id == $user->sede_id ? 'selected' : '' }}>{{ $sede->nombre }}</option>
                                         @endforeach
@@ -244,26 +216,31 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="crearUsuarioForm">
+                        <form id="crearUsuarioForm" action="{{ route('registroenter') }}" method="POST">
+                            @csrf
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" required>
+                                <input type="text" class="form-control" name="nombre" required>
                             </div>
                             <div class="mb-3">
                                 <label for="correo" class="form-label">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="correo" required>
+                                <input type="email" class="form-control" name="correo" required>
                             </div>
                             <div class="mb-3">
                                 <label for="contrasena" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="contrasena" required>
+                                <input type="password" class="form-control" name="contrasena" required>
                             </div>
                             <div class="mb-3">
                                 <label for="repetirContrasena" class="form-label">Repetir Contraseña</label>
-                                <input type="password" class="form-control" id="repetirContrasena" required>
+                                <input type="password" class="form-control" name="repetirContrasena" required>
                             </div>
                             <div class="mb-3">
                                 <label for="sede" class="form-label">Sede</label>
-                                <input type="text" class="form-control" id="sede" required>
+                                <select class="form-select" name="sede_id">
+                                    @foreach ($sedes as $sede)
+                                        <option value="{{ $sede->id }}">{{ $sede->nombre }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-dark">Registrarse</button>
                         </form>
@@ -277,3 +254,10 @@
 </body>
 
 </html>
+@if(session('error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            alert("{{ session('error') }}");
+        });
+    </script>
+@endif
