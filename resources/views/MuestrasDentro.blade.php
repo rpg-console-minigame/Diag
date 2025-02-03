@@ -48,102 +48,29 @@
                     <thead>
                         <tr>
                             <th>Descripción</th>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>  
-                        </tr>
-                        <tr>
                             <th>Formato de Muestra</th>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                        </tr>
-                        <tr>
                             <th>Sede</th>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            
-                        </tr>
-                        <tr>
                             <th>Tipo de Naturaleza</th>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                        </tr>
-                        <tr>
                             <th>Calidad</th>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                        </tr>
-                        <tr>
                             <th>Calidad Info</th>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                        </tr>
-                        <tr>
                             <th>Usuario</th>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                        </tr>
-                        <tr>
                             <th>Creado</th>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-
-                        </tr>
-                        <tr>
                             <th>Actualizado</th>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>
-                            <td>antonio@gmail.com</td>  
                         </tr>
                     </thead>
-                    <!-- <tbody>
-                    <tr class="text-center">
-                        
-                        <td>1</td>
-                        <td>Antonio Reyes</td>
-                        <td>antonio@gmail.com</td>
-                        <td>Cordoba</td>
-                        <td>1</td>
-                        <td>Antonio Reyes</td>
-                        <td>antonio@gmail.com</td>
-                        <td>antonio@gmail.com</td>
-                        <td>antonio@gmail.com</td>
-                    </tr>
-                    </tbody> -->
+                    <tbody>
+                        <tr class="text-center">
+                            <td>1</td>
+                            <td>Antonio Reyes</td>
+                            <td>antonio@gmail.com</td>
+                            <td>Cordoba</td>
+                            <td>1</td>
+                            <td>Antonio Reyes</td>
+                            <td>antonio@gmail.com</td>
+                            <td>antonio@gmail.com</td>
+                            <td>antonio@gmail.com</td>
+                        </tr>
+                    </tbody>
                     
                 </table>
             </div>
