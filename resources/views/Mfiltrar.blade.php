@@ -114,7 +114,7 @@
                     </li>
                     @if (session("user")->is_admin)
                         <li class="nav-item mb-2">
-                            <a href="{{route("registro")}}" class="nav-link text-white">Crear Usuario</a>
+                            <a href="{{route("usuarios")}}" class="nav-link text-white">Usuarios</a>
                         </li>
                     @endif
                     <li class="nav-item mb-2">

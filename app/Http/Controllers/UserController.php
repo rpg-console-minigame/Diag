@@ -24,32 +24,16 @@ class UserController extends Controller
         }
     }
 
-    public function mostrarUsuarios()
-    {
-        if(session('user')->is_admin){
-            $users = User::where('id', session('user')->getKey())->get();
-            $allUsers = User::where('id', '!=', session('user')->getKey())->get();
-            $users = $users->merge($allUsers);
-            foreach ($users as $user) {
-                $user->sede = Sede::where('id', $user->sede_id)->first();
-            }
-
-            return view('editarUsuarios', ['users' => $users]);
-        }else{
-            return redirect()->route('welcome');
-        }
-    }
-
     public function Guardar()
     {
         $data = request()->all();
         $user = new User();
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->password = bcrypt($data['password']);
+        $user->name = $data['nombre'];
+        $user->email = $data['correo'];
+        $user->password = bcrypt($data['contrasena']);
         $user->sede_id = $data['sede_id'];
         $user->save();
-        return redirect()->route('registro');
+        return redirect()->route('usuarios');
     }
 
     public function index()
@@ -103,5 +87,30 @@ class UserController extends Controller
     {
         session()->forget('user');
         return redirect()->route('login');
+    }
+    public function usersWithData()
+    {
+        $users = User::all();
+        $sedes = Sede::all();
+        foreach ($users as $user) {
+            $user->sede = Sede::where('id', $user->sede_id)->first();
+        }
+        return view('Usuarios', ['users' => $users, 'sedes'=> $sedes]);
+    }
+    public function update ($id, Request $request)
+    {
+        if (session('user')->is_admin && ( $request->contrasena == $request->contrasena1 || $request->contrasena == null && $request->contrasena1 == null) ) {
+            $user = User::where('id', $id)->first();
+            $user -> name = $request->name;
+            $user -> email = $request->email;
+            $user -> sede_id = $request->sede_id;
+            $user -> password = bcrypt($request->contrasena);
+            $user -> save();
+            return redirect()->route('usuarios');
+        }
+        else {
+            return redirect()->route('usuarios')->with('error', 'Las contraseñas no coinciden');
+        }
+            
     }
 }
