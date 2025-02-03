@@ -25,6 +25,7 @@ Route::post('/loginenter',[UserController::class, 'login'])->name('loginenter');
 Route::get('/usuarios', [UserController::class, 'usersWithData'])->name('usuarios');
 Route::post('/usuarioupdate/{id}', [UserController::class, 'update'])->name('usuarioUpdate');
 Route::post('/registroenter',[UserController::class, 'Guardar'])->name('registroenter');
+Route::post('/usuarioDelete/{id}', [UserController::class,'destroy'])->name("usuarioDelete");
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
@@ -45,4 +46,8 @@ Route::get('/Mprueba', function () {
     return view('prueba');
 });
 
+
+Route::get('/muestrasDentro', function () {
+    return view('MuestrasDentro');
+});
 
