@@ -16,7 +16,7 @@ class UserController extends Controller
 {
     public function Datos()
     {
-        if (session('user')->is_admin) {
+        if (session()->get('user')->is_admin) {
             $sedes = Sede::all();
             return view('register', ['sedes' => $sedes]);
         } else {
@@ -59,7 +59,7 @@ class UserController extends Controller
             return redirect()->route('login');
         } else {
 
-            if (session('user')->is_admin) {
+            if (session()->get('user')->is_admin) {
                 $muestras = Muestra::all();
                 foreach ($muestras as $muestra) {
                     $muestra->formato = Formato_muestra::where('id', $muestra->formato_muestra_id)->first();
@@ -107,7 +107,7 @@ class UserController extends Controller
     }
     public function update($id, Request $request)
     {
-        if (session('user')->is_admin && ($request->contrasena == $request->contrasena1 || $request->contrasena == null && $request->contrasena1 == null)) {
+        if (session()->get('user')->is_admin && ($request->contrasena == $request->contrasena1 || $request->contrasena == null && $request->contrasena1 == null)) {
             $user = User::where('id', $id)->first();
             $user->name = $request->name;
             $user->email = $request->email;
@@ -122,13 +122,26 @@ class UserController extends Controller
     }
     public function destroy($id)
     {
-        if (session('user')->is_admin) {
-            if ($id == session(key: 'user')->id)
+        if (session()->get('user')->is_admin) {
+            if ($id == session()->get('user')->id)
                 return redirect()->route('usuarios')->with('error', 'No puedes eliminarte a ti mismo');
             else {
                 $user = User::where('id', $id)->first();
-                $user->delete();
-                return redirect()->route('usuarios');
+                // eliminar todas sus muestras
+                if ($user) {
+                    $muestras = Muestra::where('user_id', $user->id)->get();
+                    foreach ($muestras as $muestra) {
+                        $imgs = Imagen::where('muestra_id', $muestra->id)->get();
+                        foreach ($imgs as $img) {
+                            unlink("uploads/".$img->link);
+                            $img->delete();
+                        }
+                        $muestra->delete();
+                    }
+                    $user->delete();
+                    return redirect()->route('usuarios');
+                }
+                else return redirect()->route('usuarios')->with('error', 'El usuario no existe');
             }
         } else {
             return redirect()->route('usuarios')->with('error', 'No tienes permisos para realizar esta acción');
