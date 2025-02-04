@@ -84,24 +84,15 @@ class MuestraController extends Controller
         }
         return redirect(route('welcome'));
     }
-
     public function delete($id){
-        if(session('user')->is_admin || Muestra::where('id', $id)->first()->user_id == session('user')->getId()){
+        if(session("user")->is_admin == true){
             $muestra = Muestra::where('id', $id)->first();
+            $imgs = Imagen::where('muestra_id', $muestra->id)->get();
+            foreach ($imgs as $img) {
+                unlink("uploads/".$img->link);
+                $img->delete();
+            }
             $muestra->delete();
-
-            $ruta = public_path('uploads/' . Imagen::where('muestra_id', $id)->first()->link);
-            if (file_exists($ruta)) {
-                unlink($ruta);
-            }
-            $imagen = Imagen::where('muestra_id', $id)->first();
-            $imagen->delete();
-
-            $interpretaciones = Interpretacion_texto::where('id_muestra', $id)->get();
-            foreach ($interpretaciones as $interpretacion) {
-                $interpretacion->delete();
-            }
-            
             return redirect(route('welcome'));
         }
     }
