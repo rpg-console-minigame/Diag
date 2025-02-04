@@ -40,9 +40,11 @@ class MuestraController extends Controller
         // Route::get('/muestra/{id}', [MuestraController::class, 'muestraInfo'])->name('muestra');
         $muestra = Muestra::where('id', $id)->first();
         // si $muestra id_user es el mismo que el id del usuario logueado
-        if ($muestra->user_id == session('user')->getAuthIdentifier()
-            || session("user")->is_admin == true) {
-            $muestra->imagen = Imagen::where('muestra_id', $id)->first();
+        if (
+            $muestra->user_id == session('user')->getAuthIdentifier()
+            || session("user")->is_admin == true
+        ) {
+            $muestra->imagen = Imagen::where('muestra_id', $id)->get();
             $muestra->formato = Formato_muestra::where('id', $muestra->formato_muestra_id)->first();
             $muestra->sede = Sede::where('id', $muestra->sede_id)->first();
             $muestra->tipo_naturaleza = Tipo_naturaleza::where('id', $muestra->tipo_naturaleza_id)->first();
@@ -84,16 +86,20 @@ class MuestraController extends Controller
         }
         return redirect(route('welcome'));
     }
-    public function delete($id){
-        if(session("user")->is_admin == true){
+    public function delete($id)
+    {
+        if (session("user")->is_admin == true) {
             $muestra = Muestra::where('id', $id)->first();
             $imgs = Imagen::where('muestra_id', $muestra->id)->get();
             foreach ($imgs as $img) {
-                unlink("uploads/".$img->link);
+                unlink("uploads/" . $img->link);
                 $img->delete();
             }
+            $interpretaciones = Interpretacion_texto::where('id_muestra', $muestra->id)->get();
+            foreach ($interpretaciones as $interpretacion)
+                $interpretacion->delete();
             $muestra->delete();
-            return redirect(route('welcome'));
         }
+        return redirect(route('welcome'));
     }
 }
