@@ -205,6 +205,13 @@
 
                 <h1 class="text-center mb-4">Detalles de la Muestra</h1>
 
+                <div class="d-flex justify-content-end gap-4">
+                    <a class="btn oscuroMedac text-white p-4" href="{{route("crearmuestra")}}">Editar</a>
+                    <a class="btn oscuroMedac text-white p-4" href="{{route("crearmuestra")}}">Borrar</a>
+                </div><br>
+
+                
+
 
                 <div class="card mb-4">
                     <div class="card-header text-center">Información General</div>
@@ -248,7 +255,7 @@
                         <div class="card-header text-center">Imagen de la Muestra</div>
                         <div class="row row-cols-md-3">
                             @foreach ($muestra->imagen as $imagen)
-                                <div class="card-body col">
+                                <div class="card-body gap-1 col">
                                     <img src="{{ asset('uploads/' . $imagen->link) }}" alt="Imagen de la muestra"
                                         class="img-fluid">
                                     <p class="card-text mt-2"><strong>Aumento:</strong> {{ $imagen->aumento }}</p>
@@ -275,11 +282,17 @@
                     </div>
                 @endif
 
+                
+
 
                 <div class="d-grid">
                     <a class="btn btn-custom" href="{{ route('interpretar', $muestra)}}">Interpretar Muestra</a>
                 </div>
+
+                
             </div>
+
+
 
         </main>
     </div>

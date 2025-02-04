@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión - Medac</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=vpn_key" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
 
     <style>
         body {
@@ -67,15 +66,31 @@
         .btn-primary:focus {
             box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
         }
+        .input-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid black;
+            border-width: 0 0 1px;
+            background-color: white;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+            border: none;
+            background-color: white;
+        }
 </style>
 </style>
     </style>
 </head>
 <body>
     <div class="login-container">
+    <h1 class="text-center">MEDAC</h1>
+    <p class="text-center">Instituto Oficial de Formación Profesional</p>
         <form action="{{ route('loginenter') }}" method="POST">
             @csrf
-            <h2 class="text-center">Inicio de Sesión</h2>
             
             <div class="form-group">
                 <label for="email"><span class="material-symbols-outlined">mail</span></label>
@@ -85,6 +100,11 @@
             <div class="form-group">
                 <label for="password"><span class="material-symbols-outlined">vpn_key</span></label>
                 <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
+            </div>
+
+            <div class="form-group">
+                <span class="material-symbols-outlined">mail</span>
+                <input type="text" name="username" id="username" class="form-control" placeholder="Usuario">
             </div>
 
             <button type="submit" class="btn btn-primary btn-block mt-3">Iniciar Sesión</button>
