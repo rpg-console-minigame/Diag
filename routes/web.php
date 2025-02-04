@@ -46,3 +46,6 @@ Route::get('/Mprueba', function () {
     return view('prueba');
 });
 
+Route::get('/medac', function () {
+    return view('medac');
+});
