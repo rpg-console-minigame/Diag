@@ -63,8 +63,6 @@ class MuestraController extends Controller
         return redirect(route('welcome'));
     }
 
-
-
     public function muestraInfo($id){
         $muestra = Muestra::where('id', $id)->first();
         // si $muestra id_user es el mismo que el id del usuario logueado
