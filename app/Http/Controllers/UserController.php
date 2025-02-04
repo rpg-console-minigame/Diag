@@ -10,7 +10,7 @@ use App\Models\Muestra;
 use App\Models\Formato_muestra;
 use App\Models\Calidad;
 use App\Models\Imagen;
-
+use App\Models\Interpretacion_texto;
 
 class UserController extends Controller
 {
@@ -136,6 +136,8 @@ class UserController extends Controller
                             unlink("uploads/".$img->link);
                             $img->delete();
                         }
+                        $interpretaciones = Interpretacion_texto::where('id_muestra', $muestra->id)->get();
+                        foreach ($interpretaciones as $interpretacion)$interpretacion->delete();
                         $muestra->delete();
                     }
                     $user->delete();
