@@ -46,7 +46,3 @@ Route::get('/Mprueba', function () {
     return view('prueba');
 });
 
-Route::get('/detallesmuestra', function () {
-    return view('MdetallesMuestra');
-});
-
