@@ -201,6 +201,10 @@
                                 </div>
                                 <button type="submit" class="btn btn-dark">Guardar Cambios</button>
                             </form>
+                            <form id="eliminarForm{{ $user->id }}" action="{{ route('usuarioDelete', $user->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Eliminar Usuario</button>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -67,7 +67,7 @@ class UserController extends Controller
                     $muestra->tipo_naturaleza = Tipo_naturaleza::where('id', $muestra->tipo_naturaleza_id)->first();
                     $muestra->calidad = Calidad::where('id', $muestra->calidad_id)->first();
                     $muestra->img = Imagen::where('muestra_id', $muestra->id)->first();
-                    $muestra->sigla = $muestra->sede->siglas ." ". $muestra->tipo_naturaleza->sigla .$muestra->id;
+                    $muestra->sigla = $muestra->sede->siglas . " " . $muestra->tipo_naturaleza->sigla . $muestra->id;
                 }
                 return view('Mfiltrar', ['muestras' => $muestras]);
             } else {
@@ -103,22 +103,35 @@ class UserController extends Controller
         foreach ($users as $user) {
             $user->sede = Sede::where('id', $user->sede_id)->first();
         }
-        return view('Usuarios', ['users' => $users, 'sedes'=> $sedes]);
+        return view('Usuarios', ['users' => $users, 'sedes' => $sedes]);
     }
-    public function update ($id, Request $request)
+    public function update($id, Request $request)
     {
-        if (session('user')->is_admin && ( $request->contrasena == $request->contrasena1 || $request->contrasena == null && $request->contrasena1 == null) ) {
+        if (session('user')->is_admin && ($request->contrasena == $request->contrasena1 || $request->contrasena == null && $request->contrasena1 == null)) {
             $user = User::where('id', $id)->first();
-            $user -> name = $request->name;
-            $user -> email = $request->email;
-            $user -> sede_id = $request->sede_id;
-            $user -> password = bcrypt($request->contrasena);
-            $user -> save();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->sede_id = $request->sede_id;
+            $user->password = bcrypt($request->contrasena);
+            $user->save();
             return redirect()->route('usuarios');
-        }
-        else {
+        } else {
             return redirect()->route('usuarios')->with('error', 'Las contraseñas no coinciden');
         }
-            
+
+    }
+    public function destroy($id)
+    {
+        if (session('user')->is_admin) {
+            if ($id == session(key: 'user')->id)
+                return redirect()->route('usuarios')->with('error', 'No puedes eliminarte a ti mismo');
+            else {
+                $user = User::where('id', $id)->first();
+                $user->delete();
+                return redirect()->route('usuarios');
+            }
+        } else {
+            return redirect()->route('usuarios')->with('error', 'No tienes permisos para realizar esta acción');
+        }
     }
 }
