@@ -176,23 +176,23 @@
 
         <aside class="oscuroMedac text-white p-4" style="width: 250px;">
             <div class="mb-5">
-
-                <h4 class="mb-4">Usuario</h4>
-
+               
+                <h4 class="mb-4">{{ Auth::user()->name ?? 'Usuario' }}</h4>
+          
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white">Muestras</a>
+                        <a href="{{route("welcome")}}" class="nav-link text-white">Muestras</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="" class="nav-link text-white">Perfil</a>
                     </li>
-
+                    @if (session("user")->is_admin)
+                        <li class="nav-item mb-2">
+                            <a href="{{route("usuarios")}}" class="nav-link text-white">Usuarios</a>
+                        </li>
+                    @endif
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white">Usuarios</a>
-                    </li>
-
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white">Cerrar Sesión</a>
+                        <a href="{{route("logout")}}" class="nav-link text-white">Cerrar Sesión</a>
                     </li>
                 </ul>
             </div>

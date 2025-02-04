@@ -126,7 +126,7 @@
 
    
         <main class="flex-grow-1 p-4">
-          
+            @if (session("user")->is_admin) 
             <div class="d-flex justify-content-end mb-4 ">
                 
                 <button class="btn text-bold dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -176,7 +176,7 @@
                     </li>
                 </ul>
             </div>
-            
+            @endif
 
 
 
@@ -191,7 +191,7 @@
                             <p class="card-text">Sede: {{ $muestra->sede->nombre }}</p>
                             <p class="card-text">Tipo de Naturaleza: {{ $muestra->tipo_naturaleza->nombre }}</p>
                             <p class="card-text">Calidad: {{ $muestra->calidad->nombre }}</p>
-                            <a href="{{ route('muestra', ['id' => $muestra->id]) }}" target="_blank">
+                            <a href="{{ route('muestra', ['id' => $muestra->id]) }}">
                                 <div class="btnMuestra whiteMedac">Ver más</div>
                             </a>
                         </div>
