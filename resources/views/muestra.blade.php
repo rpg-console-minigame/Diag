@@ -206,8 +206,8 @@
                 <h1 class="text-center mb-4">Detalles de la Muestra</h1>
 
                 <div class="d-flex justify-content-end gap-4">
-                    <a class="btn oscuroMedac text-white p-4" href="{{route("crearmuestra")}}">Editar</a>
-                    <a class="btn oscuroMedac text-white p-4" href="{{route("crearmuestra")}}">Borrar</a>
+                    <a class="btn oscuroMedac text-white p-4" href="">Editar</a>
+                    <a class="btn oscuroMedac text-white p-4" href="{{route("borrarMuestra", $muestra->id)}}">Borrar</a>
                 </div><br>
 
                 
