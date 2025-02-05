@@ -46,3 +46,6 @@ Route::get('/Mprueba', function () {
     return view('prueba');
 });
 
+Route::get('/Mlogin', function () {
+    return view('Mlogin');
+});
