@@ -88,7 +88,9 @@ class MuestraController extends Controller
     }
     public function delete($id)
     {
-        if (session("user")->is_admin == true) {
+        if (session("user")->is_admin == true
+        || Muestra::where('id', $id)->first()->user_id == session('user')->getAuthIdentifier()
+        ) {
             $muestra = Muestra::where('id', $id)->first();
             $imgs = Imagen::where('muestra_id', $muestra->id)->get();
             foreach ($imgs as $img) {
