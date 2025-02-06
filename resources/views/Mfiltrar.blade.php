@@ -85,6 +85,33 @@
             background-color: var(--medac-oscuro);
         }
 
+        .hover-card {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .sidebar {
+            background: var(--medac-oscuro);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+            width: 200px;
+        }
+
+        .sidebar a {
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: var(--medac-accent);
+            transform: scale(1.1);
+        }
+
     </style>
     
 </head>
@@ -93,41 +120,29 @@
 <body class="d-flex flex-column vh-100 bg-light">
     <header class="bg-white shadow p-3 header">
         <div class="container d-flex justify-content-between align-items-center">
-            <img src="/img/piramide.png" alt="Logo" style="width: 100px;">
+            <img src="https://instituto.medac.es/build/images/medac-logo-azul-con-letras.svg" alt="Logo" style="width: 100px;">
             <h3 class="m-0">Muestras</h2>
         </div>
     </header>
 
     <div class="d-flex flex-grow-1">
      
-        <aside class="oscuroMedac text-white p-4" style="width: 250px;">
-            <div class="mb-5">
-               
-                <h4 class="mb-4">{{ Auth::user()->name ?? 'Usuario' }}</h4>
-          
+        <aside class="sidebar col-md-3">
+                <h4>{{ Auth::user()->name ?? 'Usuario' }}</h4>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2">
-                        <a href="{{route("welcome")}}" class="nav-link text-white">Muestras</a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a href="" class="nav-link text-white">Perfil</a>
-                    </li>
+                    <li class="nav-item mb-2"><a href="{{route('welcome')}}" class="nav-link">Muestras</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link">Perfil</a></li>
                     @if (session("user")->is_admin)
-                        <li class="nav-item mb-2">
-                            <a href="{{route("usuarios")}}" class="nav-link text-white">Usuarios</a>
-                        </li>
+                        <li class="nav-item mb-2"><a href="{{route('usuarios')}}" class="nav-link">Usuarios</a></li>
                     @endif
-                    <li class="nav-item mb-2">
-                        <a href="{{route("logout")}}" class="nav-link text-white">Cerrar Sesión</a>
-                    </li>
+                    <li class="nav-item mb-2"><a href="{{route('logout')}}" class="nav-link">Cerrar Sesión</a></li>
                 </ul>
-            </div>
         </aside>
 
    
         <main class="flex-grow-1 p-4">
             @if (session("user")->is_admin) 
-            <div class="d-flex justify-content-end mb-4 ">
+            <!-- <div class="d-flex justify-content-end mb-4 ">
                 
                 <button class="btn text-bold dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     <h5 class="lightMedac">Filtrar</h5>
@@ -175,25 +190,25 @@
                         </ul>
                     </li>
                 </ul>
-            </div>
+            </div> -->
             @endif
 
 
 
-            <div class="flex-grow-1 d-flex justify-content-center align-items-center">
-                <div class="contenedor">
+            <div class="d-flex justify-content-center align-items-center py-4">
+                <div class="contenedor d-flex flex-wrap justify-content-center gap-4">
                     @foreach ($muestras as $muestra)
-                    <div class="muestra oscuroMedac">
-                        <img src="/uploads/{{$muestra->img->link}}" alt="Imagen de una pirámide">
-                        <div class="card-body whiteMedac">
-                            <h3 class="card-title">{{$muestra->sigla}}</h3>
-                            <p class="card-text">Formato: {{ $muestra->formato->nombre }}</p>
-                            <p class="card-text">Sede: {{ $muestra->sede->nombre }}</p>
-                            <p class="card-text">Tipo de Naturaleza: {{ $muestra->tipo_naturaleza->nombre }}</p>
-                            <p class="card-text">Calidad: {{ $muestra->calidad->nombre }}</p>
-                            <a href="{{ route('muestra', ['id' => $muestra->id]) }}">
-                                <div class="btnMuestra whiteMedac">Ver más</div>
-                            </a>
+                    <div class="card shadow-sm rounded overflow-hidden border-0 hover-card" style="width: 18rem;">
+                        <div style="height: 200px; overflow: hidden;">
+                            <img src="/uploads/{{$muestra->img->link}}" class="card-img-top w-100" style="height: 100%; object-fit: cover;" alt="Imagen de muestra">
+                        </div>
+                        <div class="card-body text-center bg-light">
+                            <h5 class="card-title text-primary fw-bold">{{$muestra->sigla}}</h5>
+                            <p class="card-text"><strong>Formato:</strong> {{ $muestra->formato->nombre }}</p>
+                            <p class="card-text"><strong>Sede:</strong> {{ $muestra->sede->nombre }}</p>
+                            <p class="card-text"><strong>Tipo de Naturaleza:</strong> {{ $muestra->tipo_naturaleza->nombre }}</p>
+                            <p class="card-text"><strong>Calidad:</strong> {{ $muestra->calidad->nombre }}</p>
+                            <a href="{{ route('muestra', ['id' => $muestra->id]) }}" class="btn oscuroMedac text-white w-100">Ver más</a>
                         </div>
                     </div>
                     @endforeach

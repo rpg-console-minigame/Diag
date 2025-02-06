@@ -158,6 +158,25 @@
             font-weight: 700;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
+
+        .sidebar {
+            background: var(--medac-oscuro);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+            width: 200px;
+        }
+
+        .sidebar a {
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: var(--medac-accent);
+            transform: scale(1.1);
+        }
     </style>
 
 </head>
@@ -166,35 +185,23 @@
 <body class="d-flex flex-column vh-100 bg-light">
     <header class="bg-white shadow p-3 header">
         <div class="container d-flex justify-content-between align-items-center">
-            <img src="/img/piramide.png" alt="Logo" style="width: 100px;">
-            <h3 class="m-0">Muestras</h2>
+            <img src="https://instituto.medac.es/build/images/medac-logo-azul-con-letras.svg"  alt="Logo" style="width: 100px;">
+            <h3 class="m-0">Detalles de las Muestras</h2>
         </div>
     </header>
 
     <div class="d-flex flex-grow-1">
 
-        <aside class="oscuroMedac text-white p-4" style="width: 250px;">
-            <div class="mb-5">
-               
-                <h4 class="mb-4">{{ Auth::user()->name ?? 'Usuario' }}</h4>
-          
+        <aside class="sidebar col-md-3">
+                <h4>{{ Auth::user()->name ?? 'Usuario' }}</h4>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2">
-                        <a href="{{route("welcome")}}" class="nav-link text-white">Muestras</a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a href="" class="nav-link text-white">Perfil</a>
-                    </li>
+                    <li class="nav-item mb-2"><a href="{{route('welcome')}}" class="nav-link">Muestras</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link">Perfil</a></li>
                     @if (session("user")->is_admin)
-                        <li class="nav-item mb-2">
-                            <a href="{{route("usuarios")}}" class="nav-link text-white">Usuarios</a>
-                        </li>
+                        <li class="nav-item mb-2"><a href="{{route('usuarios')}}" class="nav-link">Usuarios</a></li>
                     @endif
-                    <li class="nav-item mb-2">
-                        <a href="{{route("logout")}}" class="nav-link text-white">Cerrar Sesión</a>
-                    </li>
+                    <li class="nav-item mb-2"><a href="{{route('logout')}}" class="nav-link">Cerrar Sesión</a></li>
                 </ul>
-            </div>
         </aside>
 
 
@@ -203,13 +210,11 @@
             <div class="container py-5">
 
                 <h1 class="text-center mb-4">Detalles de la Muestra</h1>
-
-                <div class="d-flex justify-content-end gap-4">
+ 
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a class="btn oscuroMedac text-white p-4" href="">Editar</a>
                     <a class="btn oscuroMedac text-white p-4" href="{{route("borrarMuestra", $muestra->id)}}">Borrar</a>
                 </div><br>
-
-                
 
 
                 <div class="card mb-4">
@@ -251,18 +256,24 @@
 
                 @if ($muestra->imagen)
                     <div class="card mb-4">
-                        <div class="card-header text-center">Imagen de la Muestra</div>
-                        <div class="row row-cols-md-3">
-                            @foreach ($muestra->imagen as $imagen)
-                                <div class="card-body gap-1 col">
-                                    <img src="{{ asset('uploads/' . $imagen->link) }}" alt="Imagen de la muestra"
-                                        class="img-fluid">
-                                    <p class="card-text mt-2"><strong>Aumento:</strong> {{ $imagen->aumento }}</p>
-                                </div>
-                            @endforeach
+                        <div class="card-header text-center bg-primary text-white">
+                            <h5 class="mb-0">Imagen de la Muestra</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex flex-row gap-3 overflow-auto p-2" style="white-space: nowrap;">
+                                @foreach ($muestra->imagen as $imagen)
+                                    <div class=" text-center" style="min-width: 250px; max-width: 250px;">
+                                        <img src="{{ asset('uploads/' . $imagen->link) }}" alt="Imagen de la muestra" class="card-img-top img-fluid">
+                                        <div class="card-body">
+                                            <p class="card-text"><strong>Aumento:</strong> {{ $imagen->aumento }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 @endif
+
 
                 @if ($interpretaciones->count())
                     <div class="card mb-4">
