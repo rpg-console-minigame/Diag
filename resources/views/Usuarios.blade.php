@@ -84,6 +84,24 @@
         .oscuroMedac {
             background-color: var(--medac-oscuro);
         }
+        .sidebar {
+            background: var(--medac-oscuro);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+            width: 200px;
+        }
+
+        .sidebar a {
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: var(--medac-accent);
+            transform: scale(1.1);
+        }
     </style>
 
 </head>
@@ -92,35 +110,23 @@
 <body class="d-flex flex-column vh-100 bg-light">
     <header class="bg-white shadow p-3 header">
         <div class="container d-flex justify-content-between align-items-center">
-            <img src="/img/piramide.png" alt="Logo" style="width: 100px;">
-            <h3 class="m-0">Muestras</h2>
+            <img src="https://instituto.medac.es/build/images/medac-logo-azul-con-letras.svg" alt="Logo" style="width: 100px;">
+            <h3 class="m-0">Usuarios</h2>
         </div>
     </header>
 
     <div class="d-flex flex-grow-1">
 
-        <aside class="oscuroMedac text-white p-4" style="width: 250px;">
-            <div class="mb-5">
-               
-                <h4 class="mb-4">{{ Auth::user()->name ?? 'Usuario' }}</h4>
-          
+        <aside class="sidebar col-md-3">
+                <h4>{{ Auth::user()->name ?? 'Usuario' }}</h4>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2">
-                        <a href="{{route("welcome")}}" class="nav-link text-white">Muestras</a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a href="" class="nav-link text-white">Perfil</a>
-                    </li>
+                    <li class="nav-item mb-2"><a href="{{route('welcome')}}" class="nav-link">Muestras</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link">Perfil</a></li>
                     @if (session("user")->is_admin)
-                        <li class="nav-item mb-2">
-                            <a href="{{route("usuarios")}}" class="nav-link text-white">Usuarios</a>
-                        </li>
+                        <li class="nav-item mb-2"><a href="{{route('usuarios')}}" class="nav-link">Usuarios</a></li>
                     @endif
-                    <li class="nav-item mb-2">
-                        <a href="{{route("logout")}}" class="nav-link text-white">Cerrar Sesión</a>
-                    </li>
+                    <li class="nav-item mb-2"><a href="{{route('logout')}}" class="nav-link">Cerrar Sesión</a></li>
                 </ul>
-            </div>
         </aside>
 
 
