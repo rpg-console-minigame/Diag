@@ -369,6 +369,7 @@
                                     <p class="mb-1"><strong>Descripción:</strong> {{ $interpretacion->texto }}</p>
                                     <p class="mb-1"><strong>Tipo:</strong> {{ $interpretacion->interpretacionInfo->texto}}</p>
                                     <p class="mb-0"><strong>Creado:</strong> {{ $interpretacion->created_at }}</p>
+                                    <a href="{{ route('interpretacionBorrar', $interpretacion->id) }}"> borrar</a>
                                 </li>
                                 @endforeach
                             </ul>

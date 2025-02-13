@@ -35,6 +35,7 @@ Route::get('/muestra/{id}', [MuestraController::class, 'muestraInfo'])->name('mu
 
 Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->name('interpretar');
 Route::post('/interpretarenter', [InterpretacionController::class, 'create'])->name('interpretarenter');
+Route::get('/interpretarBorrar/{id}', [InterpretacionController::class , 'delete'])->name('interpretacionBorrar');
 
 Route::get('/borrarMuestra/{id}', [MuestraController::class, 'delete'])->name('borrarMuestra');
 Route::post('/actualizarMuestra/{id}', [MuestraController::class, 'actualizarMuestra'])->name('actualizarMuestra');

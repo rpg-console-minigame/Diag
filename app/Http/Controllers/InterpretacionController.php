@@ -54,4 +54,12 @@ class InterpretacionController extends Controller
             ->with('success', 'Interpretacion guardada con exito');
         }
     }
+
+    public function delete($id){
+        $interpretacion = Interpretacion_texto::where('id', $id)->first();
+        $muestra = Muestra::where("id",$interpretacion->id_muestra)->first();
+        $interpretacion->delete();
+        return redirect()->route('muestra', ['id' => $muestra->id]);
+
+    }
 }
