@@ -37,6 +37,7 @@ Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->nam
 Route::post('/interpretarenter', [InterpretacionController::class, 'create'])->name('interpretarenter');
 
 Route::get('/borrarMuestra/{id}', [MuestraController::class, 'delete'])->name('borrarMuestra');
+Route::get('/actualizarMuestra/{id}', [MuestraController::class, 'actualizarMuestra'])->name('actualizarMuestra');
 
 Route::get('/Mfiltrar', function () {
     return view('Mfiltrar');

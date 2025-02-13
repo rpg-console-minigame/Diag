@@ -186,7 +186,7 @@
     <header class="bg-white shadow p-3 header">
         <div class="container d-flex justify-content-between align-items-center">
             <img src="https://instituto.medac.es/build/images/medac-logo-azul-con-letras.svg"  alt="Logo" style="width: 100px;">
-            <h3 class="m-0">Detalles de las Muestras</h2>
+            <h3 class="m-0">Detalles de las Muestras</h3>
         </div>
     </header>
 
@@ -204,7 +204,6 @@
                 </ul>
         </aside>
 
-
         <main class="flex-grow-1 p-4">
 
             <div class="container py-5">
@@ -212,9 +211,94 @@
                 <h1 class="text-center mb-4">Detalles de la Muestra</h1>
  
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a class="btn oscuroMedac text-white p-4" href="">Editar</a>
-                    <a class="btn oscuroMedac text-white p-4" href="{{route("borrarMuestra", $muestra->id)}}">Borrar</a>
+                    <!-- Botón para abrir el modal -->
+                    <button class="btn oscuroMedac text-white p-4" data-bs-toggle="modal" data-bs-target="#editarModal">Editar</button>
+                    <a class="btn oscuroMedac text-white p-4" href="{{ route('borrarMuestra', $muestra->id) }}">Borrar</a>
                 </div><br>
+                
+                <!-- Modal de edición -->
+                <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editarModalLabel">Editar Muestra</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Formulario de edición -->
+                                <form action="{{ route('actualizarMuestra', $muestra->id) }}" method="GET">
+                                    @csrf
+                                
+                                    <!-- Tipo de Estudio -->
+                                    <div class="form-group">
+                                        <label for="tipo_estudio">Tipo de Estudio:</label>
+                                        <select class="form-control" name="tipo_estudio_id" id="tipo_estudio" required>
+                                            @foreach ($tEstudios as $tipoEstudio)
+                                                <option value="{{ $tipoEstudio->id }}" {{ $muestra->tipo_estudio_id == $tipoEstudio->id ? 'selected' : '' }}>
+                                                    {{ $tipoEstudio->nombre }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                
+                                    <!-- Descripción Calidad -->
+                                    <div class="form-group">
+                                        <label for="textoCalidad">Descripción Calidad:</label>
+                                        <input type="text" class="form-control" name="textoCalidad" id="textoCalidad" placeholder="Texto Calidad" value="{{ old('textoCalidad', $muestra->textoCalidad) }}" required>
+                                    </div>
+                                
+                                    <!-- Calidad -->
+                                    <div class="form-group">
+                                        <label for="calidad">Calidad:</label>
+                                        <select class="form-control" name="calidad_id" id="calidad" required>
+                                            @foreach ($calidades as $calidad)
+                                                <option value="{{ $calidad->id }}" data-tipo-estudio="{{ $calidad->tipo_estudio_id }}"
+                                                    {{ $muestra->calidad_id == $calidad->id ? 'selected' : '' }}>
+                                                    {{ $calidad->nombre }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                
+                                    <!-- Descripción -->
+                                    <div class="form-group">
+                                        <label for="description">Descripción:</label>
+                                        <input type="text" class="form-control" name="description" id="description" placeholder="Descripción" value="{{ old('description', $muestra->descripcion) }}" required>
+                                    </div>
+                                
+                                    <!-- Muestra -->
+                                    <div class="form-group">
+                                        <label for="muestra">Selecciona una muestra:</label>
+                                        <select class="form-control" name="muestra_id" id="muestra" required>
+                                            @foreach ($fMuestras as $fMuestra)
+                                                <option value="{{ $fMuestra->id }}" {{ $muestra->muestra_id == $fMuestra->id ? 'selected' : '' }}>
+                                                    {{ $fMuestra->nombre }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                
+                                    <!-- Naturaleza -->
+                                    <div class="form-group">
+                                        <label for="naturaleza">Tipo de Naturaleza:</label>
+                                        <select class="form-control" name="tipo_naturaleza_id" id="naturaleza" required>
+                                            @foreach ($tNaturalezas as $tNaturaleza)
+                                                <option value="{{ $tNaturaleza->id }}" {{ $muestra->tipo_naturaleza_id == $tNaturaleza->id ? 'selected' : '' }}>
+                                                    {{ $tNaturaleza->nombre }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
 
 
                 <div class="card mb-4">
@@ -309,6 +393,28 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tipoEstudioSelect = document.getElementById('tipo_estudio');
+            const calidadSelect = document.getElementById('calidad');
+            const opcionesOriginales = Array.from(calidadSelect.options);
+    
+            tipoEstudioSelect.addEventListener('change', function () {
+                const selectedTipoEstudio = this.value;
+                calidadSelect.innerHTML = '';
+    
+                opcionesOriginales.forEach(opcion => {
+                    if (!opcion.dataset.tipoEstudio || opcion.dataset.tipoEstudio === selectedTipoEstudio) {
+                        calidadSelect.appendChild(opcion);
+                    }
+                });
+            });
+    
+            tipoEstudioSelect.dispatchEvent(new Event('change'));
+        });
+    </script>
+    
 </body>
 
 </html>
