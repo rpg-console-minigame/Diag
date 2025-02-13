@@ -29,7 +29,6 @@ Route::post('/usuarioDelete/{id}', [UserController::class,'destroy'])->name("usu
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::get('/crearmuestra',[MuestraController::class, 'MuestraWithData'])->name('crearmuestra');
 Route::post('/guardar', [MuestraController::class, 'Guardar'])->name('guardar');
 Route::get('/muestra/{id}', [MuestraController::class, 'muestraInfo'])->name('muestra');
 
@@ -39,15 +38,3 @@ Route::get('/interpretarBorrar/{id}', [InterpretacionController::class , 'delete
 
 Route::get('/borrarMuestra/{id}', [MuestraController::class, 'delete'])->name('borrarMuestra');
 Route::post('/actualizarMuestra/{id}', [MuestraController::class, 'actualizarMuestra'])->name('actualizarMuestra');
-
-Route::get('/Mfiltrar', function () {
-    return view('Mfiltrar');
-});
-
-Route::get('/Mprueba', function () {
-    return view('prueba');
-});
-
-Route::get('/Mlogin', function () {
-    return view('Mlogin');
-});

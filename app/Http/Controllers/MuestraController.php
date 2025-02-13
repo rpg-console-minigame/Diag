@@ -16,24 +16,6 @@ use App\Models\Interpretacion_texto;
 
 class MuestraController extends Controller
 {
-    public function MuestraWithData()
-    {
-        $fMuestras = Formato_muestra::all();
-        $sedes = Sede::all();
-        $tipo_naturaleza = Tipo_naturaleza::all();
-        $calidad = Calidad::all();
-        $tipo_estudio = Tipo_estudio::all();
-        return view(
-            'muestracrear',
-            [
-                'fMuestras' => $fMuestras,
-                'sedes' => $sedes,
-                'tNaturalezas' => $tipo_naturaleza,
-                'calidades' => $calidad,
-                'tEstudios' => $tipo_estudio
-            ]
-        );
-    }
 
     public function muestraInfo($id)
     {
