@@ -226,7 +226,7 @@
                             </div>
                             <div class="modal-body">
                                 <!-- Formulario de edición -->
-                                <form action="{{ route('actualizarMuestra', $muestra->id) }}" method="GET">
+                                <form action="{{ route('actualizarMuestra', $muestra->id) }}" method="POST">
                                     @csrf
                                 
                                     <!-- Tipo de Estudio -->
