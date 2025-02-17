@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\MuestraController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\InterpretacionController;
-use App\Http\Controllers\UserController;
 use App\Models\User;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MuestraController;
+use App\Http\Controllers\InterpretacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,5 @@ Route::get('/interpretarBorrar/{id}', [InterpretacionController::class , 'delete
 
 Route::get('/borrarMuestra/{id}', [MuestraController::class, 'delete'])->name('borrarMuestra');
 Route::post('/actualizarMuestra/{id}', [MuestraController::class, 'actualizarMuestra'])->name('actualizarMuestra');
+
+Route::get('/pdf/{id}', [PdfController::class, 'download'])->name('pdf');

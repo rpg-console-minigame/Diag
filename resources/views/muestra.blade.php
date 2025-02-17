@@ -438,8 +438,8 @@
 
             </div>
 
-            <button class="btn btn-outline-secondary" onclick="window.print()">
-                <i class="bi bi-printer"></i> Imprimir
+            <button class="btn btn-outline-secondary">
+                <a href="{{route('pdf' , $muestra->id) }}">Imprimir</a>
             </button>
 
         </main>
