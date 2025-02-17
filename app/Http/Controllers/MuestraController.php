@@ -35,10 +35,19 @@ class MuestraController extends Controller
             $interpretaciones = Interpretacion_texto::where('id_muestra', $id)->get();
             foreach ($interpretaciones as $interpretacion) {
                 $interpretacion->interpretacionInfo = Interpretacion::where('id', $interpretacion->id_interpretacion)->first();
-            }
+            }        
+        // Obtener las interpretaciones basadas en el tipo_estudio relacionado con la muestra
+        $interpretacion_texto = Interpretacion::where('tipo_estudio_id', 
+            Tipo_estudio::where('id', 
+                Calidad::where('id', $muestra->calidad_id)->first()
+                ->tipo_estudio_id)->first()->id
+            )->get();
+
+       
             return view('muestra', ['muestra' => $muestra, 'interpretaciones' => $interpretaciones,'tEstudios' => Tipo_estudio::all(),
             'calidades' => Calidad::all(),'fMuestras' => Formato_muestra::all(),'tNaturalezas' => Tipo_naturaleza::all(),
-            'sedes' => Sede::all(),'formatos' => Formato_muestra::all()]);
+            'sedes' => Sede::all(),'formatos' => Formato_muestra::all(),
+            'interpretacion_texto' => $interpretacion_texto]);
         } else
             dd();
     }

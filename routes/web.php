@@ -32,7 +32,8 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::post('/guardar', [MuestraController::class, 'Guardar'])->name('guardar');
 Route::get('/muestra/{id}', [MuestraController::class, 'muestraInfo'])->name('muestra');
 
-Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->name('interpretar');
+// Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->name('interpretar');
+// Route::get('interpretarInfo/{id}', [InterpretacionController::class,'data'])->name('interpretarInfo');
 Route::post('/interpretarenter', [InterpretacionController::class, 'create'])->name('interpretarenter');
 Route::get('/interpretarBorrar/{id}', [InterpretacionController::class , 'delete'])->name('interpretacionBorrar');
 

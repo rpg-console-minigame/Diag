@@ -12,15 +12,22 @@ use Illuminate\Support\Facades\Validator;
 
 class InterpretacionController extends Controller
 {
-    public function index($id)
-    {
-        $muestra = Muestra::where('id', $id)->first();
-        $interpretaciones = Interpretacion::where('tipo_estudio_id', 
-        Tipo_estudio::where('id', 
-        Calidad::where('id', $muestra->calidad_id)->first()
-        ->tipo_estudio_id)->first()->id)->get();
-        return view('interpretacion',['interpretaciones' => $interpretaciones, 'muestra' => $muestra]);
-    }
+    // public function index($id)
+    // {
+    //     // Obtener la muestra por el ID
+    //     $muestra = Muestra::where('id', $id)->first();
+        
+    //     // Obtener las interpretaciones basadas en el tipo_estudio relacionado con la muestra
+    //     $interpretaciones = Interpretacion::where('tipo_estudio_id', 
+    //         Tipo_estudio::where('id', 
+    //             Calidad::where('id', $muestra->calidad_id)->first()
+    //             ->tipo_estudio_id)->first()->id
+    //         )->get();
+
+    //     // Retornar la vista 'muestra' con las interpretaciones y la muestra
+    //     return view('muestra', ['interpretaciones' => $interpretaciones, 'muestra' => $muestra]);
+    // }
+
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), 

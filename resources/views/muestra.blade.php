@@ -380,14 +380,67 @@
                 
 
 
-                <div class="d-grid">
+                {{-- <div class="d-grid">
                     <a class="btn btn-custom" href="{{ route('interpretar', $muestra)}}">Interpretar Muestra</a>
-                </div>
+                </div> --}}
 
                 
+
+                <!-- Botón para abrir el modal -->
+                <div class="d-grid">
+                    <button class="btn btn-custom" type="button" data-bs-toggle="modal" data-bs-target="#interpretarModal">
+                        Modal Muestra
+                    </button>
+                </div>
+
+                <!-- Modal de Interpretación -->
+                <div class="modal fade" id="interpretarModal" tabindex="-1" aria-labelledby="interpretarModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="interpretarModalLabel">Formulario de Interpretación</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Formulario de Interpretación -->
+                                <form action="{{ route('interpretarenter') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+
+                                    <!-- Texto -->
+                                    <div class="form-group">
+                                        <label for="texto" class="form-label">Texto</label>
+                                        <textarea class="form-control" name="texto" id="texto" cols="30" rows="5" placeholder="Ingresa el texto aquí..." required></textarea>
+                                    </div>
+
+                                    <!-- ID Muestra -->
+                                    <input type="hidden" name="id_muestra" value="{{ $muestra->id }}">
+
+                                    <!-- Interpretación -->
+                                    <div class="form-group">
+                                        <label for="id_interpretacion" class="form-label">Clave de Interpretación</label>
+                                        <select class="form-control" name="id_interpretacion" id="id_interpretacion" required>
+                                            @foreach ($interpretacion_texto as $interpretacion)
+                                                <option value="{{ $interpretacion->id }}">{{ $interpretacion->clave }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <!-- Submit -->
+                                    <div class="form-group">
+                                        <input type="submit" value="Enviar" class="btn btn-submit btn-block mt-4">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
-
+            <button class="btn btn-outline-secondary" onclick="window.print()">
+                <i class="bi bi-printer"></i> Imprimir
+            </button>
 
         </main>
     </div>
