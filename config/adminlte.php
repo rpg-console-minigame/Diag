@@ -394,8 +394,8 @@ return [
         //     'url' => '#',
         // ],
         [
-            'header' => 'a',
-            'classes' => 'text-dark text-bold text-center',
+            'header' => 'Bienvenido',
+            'classes' => 'text-bold text-center',
         ],
         [
             'text' => 'Inicio',

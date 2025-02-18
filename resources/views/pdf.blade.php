@@ -184,12 +184,12 @@
         @if ($muestra->imagen)
             <div class="card mb-4">
                 <div class="card-header bg-primary text-white text-center">Imagen de la Muestra</div>
-                <div class="card-body d-flex flex-column align-items-center justify-content-center"> 
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
                     @foreach ($muestra->imagen as $imagen)
                         <div class="text-center">
-                            <img src="{{ asset('uploads/' . $imagen->link) }}" 
-                                alt="Imagen de la muestra" 
-                                class="img-fluid rounded" 
+                            <img src="{{ asset('uploads/' . $imagen->link) }}"
+                                alt="Imagen de la muestra"
+                                class="img-fluid rounded"
                                 style="max-width: 100%; height: auto;">
                             <p class="card-text mt-2"><strong>Aumento:</strong> {{ $imagen->aumento }}</p>
                         </div>
@@ -225,7 +225,7 @@
         {{-- <div class="d-grid">
             <a class="btn btn-custom" href="{{ route('interpretar', $muestra)}}">Interpretar Muestra</a>
         </div> --}}
-                
+
 
 
                 {{-- <div class="d-grid">
@@ -244,22 +244,22 @@
             const tipoEstudioSelect = document.getElementById('tipo_estudio');
             const calidadSelect = document.getElementById('calidad');
             const opcionesOriginales = Array.from(calidadSelect.options);
-    
+
             tipoEstudioSelect.addEventListener('change', function () {
                 const selectedTipoEstudio = this.value;
                 calidadSelect.innerHTML = '';
-    
+
                 opcionesOriginales.forEach(opcion => {
                     if (!opcion.dataset.tipoEstudio || opcion.dataset.tipoEstudio === selectedTipoEstudio) {
                         calidadSelect.appendChild(opcion);
                     }
                 });
             });
-    
+
             tipoEstudioSelect.dispatchEvent(new Event('change'));
         });
     </script>
-    
+
 </body>
 
 </html>

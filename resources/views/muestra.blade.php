@@ -76,6 +76,8 @@
                     </div>
                 @endif
 
+                {{-- AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII --}}
+
                 @if ($interpretaciones->count())
                     <div class="card mb-4 hover-shadow-lg accion">
                         <div class="card-header">
@@ -91,8 +93,8 @@
                                             <p class="mb-1"><strong>Tipo:</strong> {{ $interpretacion->interpretacionInfo->texto}}</p>
                                             <p class="mb-0"><strong>Creado:</strong> {{ $interpretacion->created_at }}</p>
                                         </div>
-                                        <a href="{{ route('interpretacionBorrar', $interpretacion->id) }}" class="botones bg-danger">
-                                            <i class="fas fa-trash"></i> Borrar
+                                        <a href="{{ route('interpretacionBorrar', $interpretacion->id) }}" class="papelera bg-danger">
+                                            <i class="fas fa-trash"></i>
                                         </a>
                                     </div>
                                 </li>
@@ -244,7 +246,7 @@
         font-size: 1.25rem;
         line-height: 1.5;
         border-radius: .3rem;
-    }   
+    }
 
     .contenedor-botones {
         display: flex;
@@ -252,7 +254,9 @@
         margin-top: 1rem;
         gap: 5%
     }
-    .botones {
+
+
+.botones {
         background-color: #102f4b;
         box-shadow: 0 5px 0 #0c2337;
         border-radius: 8px;
@@ -265,10 +269,27 @@
         width: 20%;
     }
 
+.papelera {
+        box-shadow: 0 5px 0 black;
+        border-radius: 8px;
+        padding: 10px;
+        border: none;
+        font-weight: bold;
+        text-align: center;
+        color: whitesmoke;
+        /* min-width: fit-content; */
+        width: 2.5em;
+    }
+
     .botones:hover {
         color: whitesmoke;
     }
 
+    .papelera:active {
+        box-shadow: none;
+        transition: 0.1s ease;
+        transform: translateY(5px);
+    }
     .botones:active {
         box-shadow: none;
         transition: 0.1s ease;
@@ -278,7 +299,7 @@
         border: 1px solid #ddd;
         border-radius: 15px;
         overflow: hidden;
-        transition: transform 0.3s ease;  
+        transition: transform 0.3s ease;
     }
     .accion:hover{
         transform: scale(1.01);
