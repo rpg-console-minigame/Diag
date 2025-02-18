@@ -103,7 +103,7 @@ class UserController extends Controller
         foreach ($users as $user) {
             $user->sede = Sede::where('id', $user->sede_id)->first();
         }
-        return view('Usuarios', ['users' => $users, 'sedes' => $sedes]);
+        return view('Usuarios', data: ['users' => $users, 'sedes' => $sedes]);
     }
     public function update($id, Request $request)
     {
