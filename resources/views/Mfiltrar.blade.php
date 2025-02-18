@@ -1,350 +1,252 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnosis</title>
-    <!-- Carga Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+@extends('adminlte::page')
 
-    <style>
-        
-        .dropdown-menu .dropdown-menu {
-            position: absolute;
-            top: 30%;
-            right: 100%; 
-            margin-top: -5px;
-        }
+@section('title', 'Muestras')
 
-        
-        .dropdown-menu li:hover > .dropdown-menu {
-            display: block;
-        }
+@section('content_header')
+    <h1 class="m-0 text-dark">Muestras</h1>
+@stop
 
-        .header{
-            position:sticky;
-            top:0;
-            z-index: 1000;
-        }
+@section('content')
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                @if (session("user")->is_admin)
+                <div class="mb-3">
+                    <!-- <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#filterModal">
+                        <i class="fas fa-filter mr-1"></i> Filtrar
+                    </button> -->
+                    <button class="botones" type="button" data-toggle="modal" data-target="#formModal">
+                        <i class="fas fa-plus mr-1"></i> Crear Muestra
+                    </button>
+                </div>
+                @endif
 
-        .contenedor {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            padding: 20px;
-            margin: auto;
-        }
-
-        .muestra {
-            border: 1px solid #ddd;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: transform 0.3s ease; 
-        }
-
-        .muestra:hover {
-            transform: translateY(-5px);
-        }
-
-        .muestra img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-        }
-
-        .btnMuestra {
-            text-align: center;
-            padding: 10px 0;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            transition: 20s ease;
-            background-color: #333;
-            color: #fff;
-        }
-
-        :root {
-            --medac-light-blue: #0374b5;
-            --medac-white: #FFFFFF;
-            --medac-oscuro: #102f4b;
-        }
-
-        .lightMedac {
-            color: var(--medac-light-blue);
-        }
-
-        .whiteMedac {
-            color: var(--medac-white);
-        }
-
-        .oscuroMedac{
-            background-color: var(--medac-oscuro);
-        }
-
-        .hover-card {
-            transition: transform 0.3s ease;
-        }
-
-        .hover-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .sidebar {
-            background: var(--medac-oscuro);
-            color: white;
-            min-height: 100vh;
-            padding: 20px;
-            width: 200px;
-        }
-
-        .sidebar a {
-            color: white;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .sidebar a:hover {
-            color: var(--medac-accent);
-            transform: scale(1.1);
-        }
-
-    </style>
-    
-</head>
-
-
-<body class="d-flex flex-column vh-100 bg-light">
-    <header class="bg-white shadow p-3 header">
-        <div class="container d-flex justify-content-between align-items-center">
-            <img src="https://instituto.medac.es/build/images/medac-logo-azul-con-letras.svg" alt="Logo" style="width: 100px;">
-            <h3 class="m-0">Muestras</h2>
-        </div>
-    </header>
-
-    <div class="d-flex flex-grow-1">
-     
-        <aside class="sidebar col-md-3">
-                <h4>{{ Auth::user()->name ?? 'Usuario' }}</h4>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="{{route('welcome')}}" class="nav-link">Muestras</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link">Perfil</a></li>
-                    @if (session("user")->is_admin)
-                        <li class="nav-item mb-2"><a href="{{route('usuarios')}}" class="nav-link">Usuarios</a></li>
-                    @endif
-                    <li class="nav-item mb-2"><a href="{{route('logout')}}" class="nav-link">Cerrar Sesión</a></li>
-                </ul>
-        </aside>
-
-   
-        <main class="flex-grow-1 p-4">
-            @if (session("user")->is_admin) 
-            <!-- <div class="d-flex justify-content-end mb-4 ">
-                
-                <button class="btn text-bold dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    <h5 class="lightMedac">Filtrar</h5>
-                </button>
-                
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle lightMedac" href="#">Sede</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item lightMedac" href="#">Córdoba</a></li>
-                            <li><a class="dropdown-item lightMedac" href="#">Málaga</a></li>
-                            <li><a class="dropdown-item lightMedac" href="#">Madrid</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle lightMedac" href="#">Tipo de Naturaleza</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item lightMedac" href="#">Presencial</a></li>
-                            <li><a class="dropdown-item lightMedac" href="#">En línea</a></li>
-                            <li><a class="dropdown-item lightMedac" href="#">Híbrido</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle lightMedac" href="#">Formato de Muestra</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item lightMedac" href="#">Presencial</a></li>
-                            <li><a class="dropdown-item lightMedac" href="#">En línea</a></li>
-                            <li><a class="dropdown-item lightMedac" href="#">Híbrido</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle lightMedac" href="#">Calidad</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item lightMedac" href="#">Alta</a></li>
-                            <li><a class="dropdown-item lightMedac " href="#">Media</a></li>
-                            <li><a class="dropdown-item lightMedac" href="#">Baja</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle lightMedac" href="#">Tipo de Estudio</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item lightMedac" href="#">Alta</a></li>
-                            <li><a class="dropdown-item lightMedac" href="#">Media</a></li>
-                            <li><a class="dropdown-item lightMedac" href="#">Baja</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div> -->
-            @endif
-
-
-
-            <div class="d-flex justify-content-center align-items-center py-4">
-                <div class="contenedor d-flex flex-wrap justify-content-center gap-4">
+                <div class="row">
                     @foreach ($muestras as $muestra)
-                    <div class="card shadow-sm rounded overflow-hidden border-0 hover-card" style="width: 18rem;">
-                        <div style="height: 200px; overflow: hidden;">
-                            <img src="/uploads/{{$muestra->img->link}}" class="card-img-top w-100" style="height: 100%; object-fit: cover;" alt="Imagen de muestra">
-                        </div>
-                        <div class="card-body text-center bg-light">
-                            <h5 class="card-title text-primary fw-bold">{{$muestra->sigla}}</h5>
-                            <p class="card-text"><strong>Formato:</strong> {{ $muestra->formato->nombre }}</p>
-                            <p class="card-text"><strong>Sede:</strong> {{ $muestra->sede->nombre }}</p>
-                            <p class="card-text"><strong>Tipo de Naturaleza:</strong> {{ $muestra->tipo_naturaleza->nombre }}</p>
-                            <p class="card-text"><strong>Calidad:</strong> {{ $muestra->calidad->nombre }}</p>
-                            <a href="{{ route('muestra', ['id' => $muestra->id]) }}" class="btn oscuroMedac text-white w-100">Ver más</a>
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <img src="/uploads/{{$muestra->img->link}}" class="card-img-top" alt="Imagen de muestra" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$muestra->sigla}}</h5>
+                                <p class="card-text"><strong>Formato:</strong> {{ $muestra->formato->nombre }}</p>
+                                <p class="card-text"><strong>Sede:</strong> {{ $muestra->sede->nombre }}</p>
+                                <p class="card-text"><strong>Tipo:</strong> {{ $muestra->tipo_naturaleza->nombre }}</p>
+                                <p class="card-text"><strong>Calidad:</strong> {{ $muestra->calidad->nombre }}</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-top-0">
+                                <a href="{{ route('muestra', ['id' => $muestra->id]) }}" class="btn medacOscuro btn-block">Ver más</a>
+                            </div>
                         </div>
                     </div>
                     @endforeach
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Filtro -->
+<!-- <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">Filtrar Muestras</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="sede">Sede</label>
+                        <select class="form-control" id="sede">
+                            <option>Todas</option>
+                            <option>Córdoba</option>
+                            <option>Málaga</option>
+                            <option>Madrid</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipoNaturaleza">Tipo de Naturaleza</label>
+                        <select class="form-control" id="tipoNaturaleza">
+                            <option>Todos</option>
+                            <option>Presencial</option>
+                            <option>En línea</option>
+                            <option>Híbrido</option>
+                        </select>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Aplicar Filtros</button>
+            </div>
+        </div>
+    </div>
+</div> -->
 
 
-
-
-            <!-- Botón para abrir el modal -->
-            <button class="btn oscuroMedac text-white p-3" type="button" data-bs-toggle="modal" data-bs-target="#formModal">
-                Crear Muestra
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="formModalLabel">Crear Muestra</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="formModalLabel">Crear Muestra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('guardar') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="tipo_estudio">Tipo de Estudio:</label>
+                                <select class="form-control" name="tipo_estudio_id" id="tipo_estudio" required>
+                                    @foreach ($tEstudios as $tipoEstudio)
+                                        <option value="{{ $tipoEstudio->id }}">{{ $tipoEstudio->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="formato_muestra">Formato de Muestra:</label>
+                                <select class="form-control" name="muestra_id" id="formato_muestra" required>
+                                    <option value="" disabled selected>Selecciona un formato de muestra</option>
+                                    @foreach ($fMuestras as $fMuestra)
+                                        <option value="{{ $fMuestra->id }}">{{ $fMuestra->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sede">Sede:</label>
+                                <select class="form-control" name="sede_id" id="sede" required>
+                                    @foreach ($sedes as $sede)
+                                        <option value="{{ $sede->id }}">{{ $sede->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <!-- Formulario para crear la muestra -->
-                            <form action="{{ route('guardar') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-
-                                <!-- Tipo de Estudio -->
-                                <div class="form-group">
-                                    <label for="tipo_estudio">Tipo de Estudio:</label>
-                                    <select class="form-control" name="tipo_estudio_id" id="tipo_estudio" required>
-                                        @foreach ($tEstudios as $tipoEstudio)
-                                            <option value="{{ $tipoEstudio->id }}">{{ $tipoEstudio->nombre }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <!-- Formato de Muestra -->
-                                <div class="form-group">
-                                    <label for="formato_muestra">Formato de Muestra:</label>
-                                    <select class="form-control" name="muestra_id" id="formato_muestra" required>
-                                        <option value="" disabled selected>Selecciona un formato de muestra</option> <!-- Opción por defecto -->
-                                        @foreach ($fMuestras as $fMuestra)
-                                            <option value="{{ $fMuestra->id }}">{{ $fMuestra->nombre }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <!-- Sede -->
-                                <div class="form-group">
-                                    <label for="sede">Sede:</label>
-                                    <select class="form-control" name="sede_id" id="sede" required>
-                                        @foreach ($sedes as $sede)
-                                            <option value="{{ $sede->id }}">{{ $sede->nombre }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <!-- Tipo de Naturaleza -->
-                                <div class="form-group">
-                                    <label for="tipo_naturaleza">Tipo de Naturaleza:</label>
-                                    <select class="form-control" name="tipo_naturaleza_id" id="tipo_naturaleza" required>
-                                        @foreach ($tNaturalezas as $tNaturaleza)
-                                            <option value="{{ $tNaturaleza->id }}">{{ $tNaturaleza->nombre }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <!-- Calidad -->
-                                <div class="form-group">
-                                    <label for="calidad">Calidad:</label>
-                                    <select class="form-control" name="calidad_id" id="calidad" required>
-                                        @foreach ($calidades as $calidad)
-                                            <option value="{{ $calidad->id }}" data-tipo-estudio="{{ $calidad->tipo_estudio_id }}">
-                                                {{ $calidad->nombre }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <!-- Texto Calidad -->
-                                <div class="form-group">
-                                    <label for="textoCalidad">Texto Calidad:</label>
-                                    <input type="text" class="form-control" name="textoCalidad" id="textoCalidad" placeholder="Texto Calidad" required>
-                                </div>
-
-
-                                <!-- Descripción -->
-                                <div class="form-group">
-                                    <label for="description">Descripción:</label>
-                                    <input type="text" class="form-control" name="description" id="description" placeholder="Descripción" required>
-                                </div>
-
-                                <!-- Aumento -->
-                                <div class="form-group">
-                                    <label for="aumento">Aumento:</label>
-                                    <input type="number" class="form-control" name="aumento" id="aumento" placeholder="Aumento" required>
-                                </div>
-
-                                <!-- Imagen -->
-                                <div class="form-group">
-                                    <label for="image">Imagen:</label>
-                                    <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
-                                </div>
-
-                                <!-- Botón para enviar el formulario -->
-                                <button type="submit" class="btn btn-success btn-block mt-3">Crear Muestra</button>
-                            </form>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="tipo_naturaleza">Tipo de Naturaleza:</label>
+                                <select class="form-control" name="tipo_naturaleza_id" id="tipo_naturaleza" required>
+                                    @foreach ($tNaturalezas as $tNaturaleza)
+                                        <option value="{{ $tNaturaleza->id }}">{{ $tNaturaleza->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="calidad">Calidad:</label>
+                                <select class="form-control" name="calidad_id" id="calidad" required>
+                                    @foreach ($calidades as $calidad)
+                                        <option value="{{ $calidad->id }}" data-tipo-estudio="{{ $calidad->tipo_estudio_id }}">
+                                            {{ $calidad->nombre }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="textoCalidad">Texto Calidad:</label>
+                                <input type="text" class="form-control" name="textoCalidad" id="textoCalidad" placeholder="Texto Calidad" required>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="description">Descripción:</label>
+                        <textarea class="form-control" name="description" id="description" rows="3" placeholder="Descripción" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="aumento">Aumento:</label>
+                        <input type="number" class="form-control" name="aumento" id="aumento" placeholder="Aumento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Imagen:</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="image" name="image" accept="image/*" required>
+                            <label class="custom-file-label" for="image">Seleccionar archivo</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn medacOscuro btn-block mt-3">Crear Muestra</button>
+                </form>
             </div>
-
-        </main>
+        </div>
     </div>
+</div>
+@stop
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const tipoEstudioSelect = document.getElementById('tipo_estudio');
-            const calidadSelect = document.getElementById('calidad');
-            const calidades = Array.from(calidadSelect.options);
-    
-            tipoEstudioSelect.addEventListener('change', function () {
-                const selectedTipoEstudio = this.value;
-                calidadSelect.innerHTML = '';
-    
-                calidades.forEach(function (calidad) {
-                    if (calidad.dataset.tipoEstudio === selectedTipoEstudio) {
-                        calidadSelect.appendChild(calidad);
-                    }
-                });
+@section('css')
+    <style>
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .btn-primary, .btn-success {
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover, .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .medacOscuro{
+            background-color: #343a40;
+            color: white;
+        }
+        .botones {
+            background-color: #102f4b;
+            box-shadow: 0 5px 0 #0c2337;
+            border-radius: 8px;
+            padding: 10px;
+            border: none;
+            font-weight: bold;
+            text-align: center;
+            color: whitesmoke;
+            min-width: fit-content;
+            width: 20%;
+        }
+
+        .botones:hover {
+            color: whitesmoke;
+        }
+
+        .botones:active {
+            box-shadow: none;
+            transition: 0.1s ease;
+            transform: translateY(5px);
+        }
+    </style>
+@stop
+
+@section('js')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tipoEstudioSelect = document.getElementById('tipo_estudio');
+        const calidadSelect = document.getElementById('calidad');
+        const calidades = Array.from(calidadSelect.options);
+
+        tipoEstudioSelect.addEventListener('change', function () {
+            const selectedTipoEstudio = this.value;
+            calidadSelect.innerHTML = '';
+
+            calidades.forEach(function (calidad) {
+                if (calidad.dataset.tipoEstudio === selectedTipoEstudio) {
+                    calidadSelect.appendChild(calidad);
+                }
             });
-    
-            tipoEstudioSelect.dispatchEvent(new Event('change'));
         });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+
+        tipoEstudioSelect.dispatchEvent(new Event('change'));
+
+        // Para mostrar el nombre del archivo seleccionado en el input de tipo file
+        $('.custom-file-input').on('change', function() {
+            let fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        });
+    });
+</script>
+@stop
+
