@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\MuestraController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\InterpretacionController;
-use App\Http\Controllers\UserController;
 use App\Models\User;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MuestraController;
+use App\Http\Controllers\InterpretacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,23 +30,15 @@ Route::post('/usuarioDelete/{id}', [UserController::class,'destroy'])->name("usu
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::get('/crearmuestra',[MuestraController::class, 'MuestraWithData'])->name('crearmuestra');
 Route::post('/guardar', [MuestraController::class, 'Guardar'])->name('guardar');
 Route::get('/muestra/{id}', [MuestraController::class, 'muestraInfo'])->name('muestra');
 
-Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->name('interpretar');
+// Route::get('/interpretar/{id}', [InterpretacionController::class, 'index'])->name('interpretar');
+// Route::get('interpretarInfo/{id}', [InterpretacionController::class,'data'])->name('interpretarInfo');
 Route::post('/interpretarenter', [InterpretacionController::class, 'create'])->name('interpretarenter');
+Route::get('/interpretarBorrar/{id}', [InterpretacionController::class , 'delete'])->name('interpretacionBorrar');
 
 Route::get('/borrarMuestra/{id}', [MuestraController::class, 'delete'])->name('borrarMuestra');
+Route::post('/actualizarMuestra/{id}', [MuestraController::class, 'actualizarMuestra'])->name('actualizarMuestra');
 
-Route::get('/Mfiltrar', function () {
-    return view('Mfiltrar');
-});
-
-Route::get('/Mprueba', function () {
-    return view('prueba');
-});
-
-Route::get('/Mlogin', function () {
-    return view('Mlogin');
-});
+Route::get('/pdf/{id}', [PdfController::class, 'download'])->name('pdf');
