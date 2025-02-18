@@ -215,14 +215,136 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-end">
-                <a class="btn oscuroMedac text-white p-3" href="{{route("crearmuestra")}}">Crear Muestra</a>
+
+
+
+            <!-- Botón para abrir el modal -->
+            <button class="btn oscuroMedac text-white p-3" type="button" data-bs-toggle="modal" data-bs-target="#formModal">
+                Crear Muestra
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="formModalLabel">Crear Muestra</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Formulario para crear la muestra -->
+                            <form action="{{ route('guardar') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+
+                                <!-- Tipo de Estudio -->
+                                <div class="form-group">
+                                    <label for="tipo_estudio">Tipo de Estudio:</label>
+                                    <select class="form-control" name="tipo_estudio_id" id="tipo_estudio" required>
+                                        @foreach ($tEstudios as $tipoEstudio)
+                                            <option value="{{ $tipoEstudio->id }}">{{ $tipoEstudio->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Formato de Muestra -->
+                                <div class="form-group">
+                                    <label for="formato_muestra">Formato de Muestra:</label>
+                                    <select class="form-control" name="muestra_id" id="formato_muestra" required>
+                                        <option value="" disabled selected>Selecciona un formato de muestra</option> <!-- Opción por defecto -->
+                                        @foreach ($fMuestras as $fMuestra)
+                                            <option value="{{ $fMuestra->id }}">{{ $fMuestra->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Sede -->
+                                <div class="form-group">
+                                    <label for="sede">Sede:</label>
+                                    <select class="form-control" name="sede_id" id="sede" required>
+                                        @foreach ($sedes as $sede)
+                                            <option value="{{ $sede->id }}">{{ $sede->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Tipo de Naturaleza -->
+                                <div class="form-group">
+                                    <label for="tipo_naturaleza">Tipo de Naturaleza:</label>
+                                    <select class="form-control" name="tipo_naturaleza_id" id="tipo_naturaleza" required>
+                                        @foreach ($tNaturalezas as $tNaturaleza)
+                                            <option value="{{ $tNaturaleza->id }}">{{ $tNaturaleza->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Calidad -->
+                                <div class="form-group">
+                                    <label for="calidad">Calidad:</label>
+                                    <select class="form-control" name="calidad_id" id="calidad" required>
+                                        @foreach ($calidades as $calidad)
+                                            <option value="{{ $calidad->id }}" data-tipo-estudio="{{ $calidad->tipo_estudio_id }}">
+                                                {{ $calidad->nombre }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Texto Calidad -->
+                                <div class="form-group">
+                                    <label for="textoCalidad">Texto Calidad:</label>
+                                    <input type="text" class="form-control" name="textoCalidad" id="textoCalidad" placeholder="Texto Calidad" required>
+                                </div>
+
+
+                                <!-- Descripción -->
+                                <div class="form-group">
+                                    <label for="description">Descripción:</label>
+                                    <input type="text" class="form-control" name="description" id="description" placeholder="Descripción" required>
+                                </div>
+
+                                <!-- Aumento -->
+                                <div class="form-group">
+                                    <label for="aumento">Aumento:</label>
+                                    <input type="number" class="form-control" name="aumento" id="aumento" placeholder="Aumento" required>
+                                </div>
+
+                                <!-- Imagen -->
+                                <div class="form-group">
+                                    <label for="image">Imagen:</label>
+                                    <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
+                                </div>
+
+                                <!-- Botón para enviar el formulario -->
+                                <button type="submit" class="btn btn-success btn-block mt-3">Crear Muestra</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </main>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tipoEstudioSelect = document.getElementById('tipo_estudio');
+            const calidadSelect = document.getElementById('calidad');
+            const calidades = Array.from(calidadSelect.options);
     
+            tipoEstudioSelect.addEventListener('change', function () {
+                const selectedTipoEstudio = this.value;
+                calidadSelect.innerHTML = '';
+    
+                calidades.forEach(function (calidad) {
+                    if (calidad.dataset.tipoEstudio === selectedTipoEstudio) {
+                        calidadSelect.appendChild(calidad);
+                    }
+                });
+            });
+    
+            tipoEstudioSelect.dispatchEvent(new Event('change'));
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

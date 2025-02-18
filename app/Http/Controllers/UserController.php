@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Muestra;
 use App\Models\Formato_muestra;
 use App\Models\Calidad;
+use App\Models\Tipo_estudio;
 use App\Models\Imagen;
 use App\Models\Interpretacion_texto;
 
@@ -52,37 +53,62 @@ class UserController extends Controller
         }
         return redirect()->route('login');
     }
+    
     public function welcomeWittData()
-    {
-        session_start();
-        if (!session('user')) {
-            return redirect()->route('login');
-        } else {
+{
+    session_start();
+    
+    // Verificar si el usuario está logueado
+    if (!session('user')) {
+        return redirect()->route('login');
+    } else {
 
-            if (session()->get('user')->is_admin) {
-                $muestras = Muestra::all();
-                foreach ($muestras as $muestra) {
-                    $muestra->formato = Formato_muestra::where('id', $muestra->formato_muestra_id)->first();
-                    $muestra->sede = Sede::where('id', $muestra->sede_id)->first();
-                    $muestra->tipo_naturaleza = Tipo_naturaleza::where('id', $muestra->tipo_naturaleza_id)->first();
-                    $muestra->calidad = Calidad::where('id', $muestra->calidad_id)->first();
-                    $muestra->img = Imagen::where('muestra_id', $muestra->id)->first();
-                    $muestra->sigla = $muestra->sede->siglas . " " . $muestra->tipo_naturaleza->sigla . $muestra->id;
-                }
-                return view('Mfiltrar', ['muestras' => $muestras]);
-            } else {
-                $muestras = Muestra::where('user_id', session('user')->getKey())->get();
-                foreach ($muestras as $muestra) {
-                    $muestra->formato = Formato_muestra::where('id', $muestra->formato_muestra_id)->first();
-                    $muestra->sede = Sede::where('id', $muestra->sede_id)->first();
-                    $muestra->tipo_naturaleza = Tipo_naturaleza::where('id', $muestra->tipo_naturaleza_id)->first();
-                    $muestra->calidad = Calidad::where('id', $muestra->calidad_id)->first();
-                    $muestra->img = Imagen::where('muestra_id', $muestra->id)->first();
-                }
-                return view('Mfiltrar', ['muestras' => $muestras]);
+        // Obtener los datos adicionales como en la función MuestraWithData
+        $fMuestras = Formato_muestra::all();
+        $sedes = Sede::all();
+        $tipo_naturaleza = Tipo_naturaleza::all();
+        $calidad = Calidad::all();
+        $tipo_estudio = Tipo_estudio::all();
+
+        if (session()->get('user')->is_admin) {
+            $muestras = Muestra::all();
+            foreach ($muestras as $muestra) {
+                $muestra->formato = Formato_muestra::where('id', $muestra->formato_muestra_id)->first();
+                $muestra->sede = Sede::where('id', $muestra->sede_id)->first();
+                $muestra->tipo_naturaleza = Tipo_naturaleza::where('id', $muestra->tipo_naturaleza_id)->first();
+                $muestra->calidad = Calidad::where('id', $muestra->calidad_id)->first();
+                $muestra->img = Imagen::where('muestra_id', $muestra->id)->first();
+                $muestra->sigla = $muestra->sede->siglas . " " . $muestra->tipo_naturaleza->sigla . $muestra->id;
             }
+            return view('Mfiltrar', [
+                'muestras' => $muestras,
+                'fMuestras' => $fMuestras,
+                'sedes' => $sedes,
+                'tNaturalezas' => $tipo_naturaleza,
+                'calidades' => $calidad,
+                'tEstudios' => $tipo_estudio
+            ]);
+        } else {
+            $muestras = Muestra::where('user_id', session('user')->getKey())->get();
+            foreach ($muestras as $muestra) {
+                $muestra->formato = Formato_muestra::where('id', $muestra->formato_muestra_id)->first();
+                $muestra->sede = Sede::where('id', $muestra->sede_id)->first();
+                $muestra->tipo_naturaleza = Tipo_naturaleza::where('id', $muestra->tipo_naturaleza_id)->first();
+                $muestra->calidad = Calidad::where('id', $muestra->calidad_id)->first();
+                $muestra->img = Imagen::where('muestra_id', $muestra->id)->first();
+            }
+            return view('Mfiltrar', [
+                'muestras' => $muestras,
+                'fMuestras' => $fMuestras,
+                'sedes' => $sedes,
+                'tNaturalezas' => $tipo_naturaleza,
+                'calidades' => $calidad,
+                'tEstudios' => $tipo_estudio
+            ]);
         }
     }
+}
+
     public function logout()
     {
         session()->forget('user');
