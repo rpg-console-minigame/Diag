@@ -16,24 +16,6 @@ use App\Models\Interpretacion_texto;
 
 class MuestraController extends Controller
 {
-    public function MuestraWithData()
-    {
-        $fMuestras = Formato_muestra::all();
-        $sedes = Sede::all();
-        $tipo_naturaleza = Tipo_naturaleza::all();
-        $calidad = Calidad::all();
-        $tipo_estudio = Tipo_estudio::all();
-        return view(
-            'muestracrear',
-            [
-                'fMuestras' => $fMuestras,
-                'sedes' => $sedes,
-                'tNaturalezas' => $tipo_naturaleza,
-                'calidades' => $calidad,
-                'tEstudios' => $tipo_estudio
-            ]
-        );
-    }
 
     public function muestraInfo($id)
     {
@@ -53,13 +35,25 @@ class MuestraController extends Controller
             $interpretaciones = Interpretacion_texto::where('id_muestra', $id)->get();
             foreach ($interpretaciones as $interpretacion) {
                 $interpretacion->interpretacionInfo = Interpretacion::where('id', $interpretacion->id_interpretacion)->first();
-            }
-            return view('muestra', ['muestra' => $muestra, 'interpretaciones' => $interpretaciones]);
+            }        
+        // Obtener las interpretaciones basadas en el tipo_estudio relacionado con la muestra
+        $interpretacion_texto = Interpretacion::where('tipo_estudio_id', 
+            Tipo_estudio::where('id', 
+                Calidad::where('id', $muestra->calidad_id)->first()
+                ->tipo_estudio_id)->first()->id
+            )->get();
+
+       
+            return view('muestra', ['muestra' => $muestra, 'interpretaciones' => $interpretaciones,'tEstudios' => Tipo_estudio::all(),
+            'calidades' => Calidad::all(),'fMuestras' => Formato_muestra::all(),'tNaturalezas' => Tipo_naturaleza::all(),
+            'sedes' => Sede::all(),'formatos' => Formato_muestra::all(),
+            'interpretacion_texto' => $interpretacion_texto]);
         } else
             dd();
     }
 
     public function guardar(Request $request)
+
     {
         session_start();
         if (!session()->has('user')) {
@@ -104,4 +98,17 @@ class MuestraController extends Controller
         }
         return redirect(route('welcome'));
     }
+
+    public function actualizarMuestra(Request $request, $id){
+        $muestra = Muestra::where('id', $id)->first();
+        $muestra->descripcion = $request->input('description');
+        $muestra->formato_muestra_id = $request->muestra_id;
+        $muestra->textoCalidad = $request->input('textoCalidad');
+        $muestra->tipo_naturaleza_id = $request->input('tipo_naturaleza_id');
+        $muestra->calidad_id = $request->input('calidad_id');
+        $muestra->user_id = session('user')->getAuthIdentifier();
+        $muestra->save();
+        return redirect(route('muestra', ['id' => $id]));
+    }
+
 }
