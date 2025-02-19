@@ -404,7 +404,7 @@ return [
             'classes' => 'font-weight-bold',
         ],
         [
-            'text' => 'Pacientes',
+            'text' => 'Usuarios',
             'url' => 'usuarios',
             'icon' => 'fas fa-fw fa-user',
             'classes' => 'font-weight-bold',
