@@ -54,39 +54,34 @@ class MuestraController extends Controller
     }
 
     public function guardar(Request $request)
-
     {
 
-        $validator = Validator::make($request->all(), 
-        [
+        $validator = Validator::make($request->all(), [
             'description' => 'required|min:10|max:255',
             'tipo_estudio_id' => 'exists:tipo_estudio,id',
             'sede_id' => 'exists:sede,id',
             'textoCalidad' => 'required|min:10|max:255',
             'tipo_naturaleza_id' => 'exists:tipo_naturaleza,id',
             'calidad_id' => 'exists:calidad,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20000',
-            'muestra_id' => 'exists:muestra,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:8000',
             'aumento' => 'required|numeric',
-        ],
-        [
-            'description.required' => 'La descripcion es requerido',
-            'description.min' => 'La descripcion debe tener al menos 20 caracteres',
-            'description.max' => 'La descripcion debe tener maximo 255 caracteres',
+        ], [
+            'description.required' => 'La descripción es requerida',
+            'description.min' => 'La descripción debe tener al menos 10 caracteres',
+            'description.max' => 'La descripción debe tener máximo 255 caracteres',
             'tipo_estudio_id.exists' => 'El tipo de estudio no existe',
             'sede_id.exists' => 'La sede no existe',
             'textoCalidad.required' => 'El texto de calidad es requerido',
-            'textoCalidad.min' => 'El texto de calidad debe tener al menos 20 caracteres',
-            'textoCalidad.max' => 'El texto de calidad debe tener maximo 255 caracteres',
+            'textoCalidad.min' => 'El texto de calidad debe tener al menos 10 caracteres',
+            'textoCalidad.max' => 'El texto de calidad debe tener máximo 255 caracteres',
             'tipo_naturaleza_id.exists' => 'El tipo de naturaleza no existe',
             'calidad_id.exists' => 'La calidad no existe',
             'image.required' => 'La imagen es requerida',
             'image.image' => 'El archivo debe ser una imagen',
             'image.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg, gif, svg',
-            'image.max' => 'La imagen debe pesar maximo 20000 KB',
-            'muestra_id.exists' => 'La muestra no existe',
+            'image.max' => 'La imagen debe pesar máximo 8MB',
             'aumento.required' => 'El aumento es requerido',
-            'aumento.numeric' => 'El aumento debe ser un numero',
+            'aumento.numeric' => 'El aumento debe ser un número',
         ]);
 
         if($validator->fails())
