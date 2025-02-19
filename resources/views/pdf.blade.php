@@ -130,19 +130,23 @@
         </div>
     </div>
 
-    @if ($muestra->imagen)
-        <div class="card">
-            <div class="card-header">Imagen de la Muestra</div>
-            <div class="card-body">
-                @foreach ($muestra->imagen as $imagen)
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <img src="{{ asset('uploads/' . $imagen->link) }}" alt="Imagen de la muestra" class="img-fluid">
-                        <p><strong>Aumento:</strong> {{ $imagen->aumento }}</p>
-                    </div>
-                @endforeach
+        <!-- Imágenes de la Muestra -->
+        @if ($muestra->imagen)
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white text-center">Imagen de la Muestra</div>
+                <div class="card-body d-flex flex-column align-items-center justify-content-center"> 
+                    @foreach ($muestra->imagen as $imagen)
+                        <div class="text-center">
+                            <img src="{{ asset('uploads/' . $imagen->link) }}" 
+                                alt="Imagen de la muestra" 
+                                class="img-fluid rounded" 
+                                style="max-width: 100%; height: auto;">
+                            <p class="card-text mt-2"><strong>Aumento:</strong> {{ $imagen->aumento }}</p>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        </div>
-    @endif
+        @endif
 
     @if ($interpretaciones->count())
         <div class="card">
@@ -157,6 +161,46 @@
                 @endforeach
             </div>
         </div>
-    @endif
+        @endif
+
+        <!-- Botón de acción (opcional) -->
+        {{-- <div class="d-grid">
+            <a class="btn btn-custom" href="{{ route('interpretar', $muestra)}}">Interpretar Muestra</a>
+        </div> --}}
+                
+
+
+                {{-- <div class="d-grid">
+                    <a class="btn btn-custom" href="{{ route('interpretar', $muestra)}}">Interpretar Muestra</a>
+                </div> --}}
+            </div>
+
+        </main>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tipoEstudioSelect = document.getElementById('tipo_estudio');
+            const calidadSelect = document.getElementById('calidad');
+            const opcionesOriginales = Array.from(calidadSelect.options);
+    
+            tipoEstudioSelect.addEventListener('change', function () {
+                const selectedTipoEstudio = this.value;
+                calidadSelect.innerHTML = '';
+    
+                opcionesOriginales.forEach(opcion => {
+                    if (!opcion.dataset.tipoEstudio || opcion.dataset.tipoEstudio === selectedTipoEstudio) {
+                        calidadSelect.appendChild(opcion);
+                    }
+                });
+            });
+    
+            tipoEstudioSelect.dispatchEvent(new Event('change'));
+        });
+    </script>
+    
 </body>
 </html>
