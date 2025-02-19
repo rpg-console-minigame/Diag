@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Muestra;
-use Illuminate\Http\Request;
-use App\Models\Formato_muestra;
 use App\Models\Sede;
-use App\Models\Tipo_naturaleza;
-use App\Models\Calidad;
-use App\Models\Tipo_estudio;
-use App\Models\Imagen;
 use App\Models\User;
+use App\Models\Imagen;
+use App\Models\Calidad;
+use App\Models\Muestra;
+use App\Models\Tipo_estudio;
+use Illuminate\Http\Request;
 use App\Models\Interpretacion;
+use App\Models\Formato_muestra;
+use App\Models\Tipo_naturaleza;
 use App\Models\Interpretacion_texto;
+use Illuminate\Support\Facades\Validator;
 
 class MuestraController extends Controller
 {
@@ -55,30 +56,71 @@ class MuestraController extends Controller
     public function guardar(Request $request)
 
     {
-        session_start();
-        if (!session()->has('user')) {
-            return redirect('/login')->withErrors(['msg' => 'User not logged in']);
+
+        $validator = Validator::make($request->all(), 
+        [
+            'description' => 'required|min:10|max:255',
+            'tipo_estudio_id' => 'exists:tipo_estudio,id',
+            'sede_id' => 'exists:sede,id',
+            'textoCalidad' => 'required|min:10|max:255',
+            'tipo_naturaleza_id' => 'exists:tipo_naturaleza,id',
+            'calidad_id' => 'exists:calidad,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20000',
+            'muestra_id' => 'exists:muestra,id',
+            'aumento' => 'required|numeric',
+        ],
+        [
+            'description.required' => 'La descripcion es requerido',
+            'description.min' => 'La descripcion debe tener al menos 20 caracteres',
+            'description.max' => 'La descripcion debe tener maximo 255 caracteres',
+            'tipo_estudio_id.exists' => 'El tipo de estudio no existe',
+            'sede_id.exists' => 'La sede no existe',
+            'textoCalidad.required' => 'El texto de calidad es requerido',
+            'textoCalidad.min' => 'El texto de calidad debe tener al menos 20 caracteres',
+            'textoCalidad.max' => 'El texto de calidad debe tener maximo 255 caracteres',
+            'tipo_naturaleza_id.exists' => 'El tipo de naturaleza no existe',
+            'calidad_id.exists' => 'La calidad no existe',
+            'image.required' => 'La imagen es requerida',
+            'image.image' => 'El archivo debe ser una imagen',
+            'image.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg, gif, svg',
+            'image.max' => 'La imagen debe pesar maximo 20000 KB',
+            'muestra_id.exists' => 'La muestra no existe',
+            'aumento.required' => 'El aumento es requerido',
+            'aumento.numeric' => 'El aumento debe ser un numero',
+        ]);
+
+        if($validator->fails())
+        {
+            return redirect()->route('welcome', ['id' => $request->id_muestra])
+            ->withErrors($validator)
+            ->withInput();
         }
-        $muestra = new Muestra();
-        $muestra->descripcion = $request->input('description');
-        $muestra->formato_muestra_id = $request->input('muestra_id');
-        $muestra->textoCalidad = $request->input('textoCalidad');
-        $muestra->sede_id = session('user')->sede_id;
-        $muestra->tipo_naturaleza_id = $request->input('tipo_naturaleza_id');
-        $muestra->calidad_id = $request->input('calidad_id');
-        $muestra->user_id = session('user')->getAuthIdentifier();
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->extension();
-            $image->move(public_path('uploads'), $imageName);
-            $img = new Imagen();
-            $img->aumento = $request->aumento;
-            $img->link = $imageName;
-            $muestra->save();
-            $img->muestra_id = $muestra->id;
-            $img->save();
+        else{
+            session_start();
+            if (!session()->has('user')) {
+                return redirect('/login')->withErrors(['msg' => 'User not logged in']);
+            }
+            $muestra = new Muestra();
+            $muestra->descripcion = $request->input('description');
+            $muestra->formato_muestra_id = $request->input('muestra_id');
+            $muestra->textoCalidad = $request->input('textoCalidad');
+            $muestra->sede_id = session('user')->sede_id;
+            $muestra->tipo_naturaleza_id = $request->input('tipo_naturaleza_id');
+            $muestra->calidad_id = $request->input('calidad_id');
+            $muestra->user_id = session('user')->getAuthIdentifier();
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->extension();
+                $image->move(public_path('uploads'), $imageName);
+                $img = new Imagen();
+                $img->aumento = $request->aumento;
+                $img->link = $imageName;
+                $muestra->save();
+                $img->muestra_id = $muestra->id;
+                $img->save();
+            }
+            return redirect(route('welcome'));
         }
-        return redirect(route('welcome'));
     }
     public function delete($id)
     {

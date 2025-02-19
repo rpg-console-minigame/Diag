@@ -441,6 +441,7 @@
             <button class="btn btn-outline-secondary">
                 <a href="{{route('pdf' , $muestra->id) }}">Imprimir</a>
             </button>
+            
 
         </main>
     </div>

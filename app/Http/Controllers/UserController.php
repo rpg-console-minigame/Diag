@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sede;
-use App\Models\tipo_naturaleza;
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\Models\Muestra;
-use App\Models\Formato_muestra;
-use App\Models\Calidad;
-use App\Models\Tipo_estudio;
 use App\Models\Imagen;
+use App\Models\Calidad;
+use App\Models\Muestra;
+use App\Models\Tipo_estudio;
+use Illuminate\Http\Request;
+use App\Models\Formato_muestra;
+use App\Models\tipo_naturaleza;
 use App\Models\Interpretacion_texto;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -28,15 +29,44 @@ class UserController extends Controller
     public function Guardar()
     {
         $data = request()->all();
-        $user = new User();
-        $user->name = $data['nombre'];
-        $user->email = $data['correo'];
-        $user->password = bcrypt($data['contrasena']);
-        $user->sede_id = $data['sede_id'];
-        $user->save();
-        return redirect()->route('usuarios');
-    }
 
+        $validator = Validator::make($data, 
+        [
+            'nombre' => 'required|min:3|max:255',
+            'correo' => 'required|email',
+            'contrasena' => 'required|min:4',
+            'sede_id' => 'exists:sede,id'
+        ],
+        [
+            'nombre.required' => 'El nombre es requerido',
+            'nombre.min' => 'El nombre debe tener al menos 3 caracteres',
+            'nombre.max' => 'El nombre debe tener maximo 255 caracteres',
+            'correo.required' => 'El correo es requerido',
+            'correo.email' => 'El correo debe ser un email',
+            'contrasena.required' => 'La contraseña es requerida',
+            'contrasena.min' => 'La contraseña debe tener al menos 6 caracteres',
+            'sede_id.exists' => 'La sede no existe'
+        ]);
+
+
+
+        if($validator->fails())
+        {
+            return redirect()->route('usuarios')
+            ->withErrors($validator)
+            ->withInput();
+        }
+        else{  
+            
+            $user = new User();
+            $user->name = $data['nombre'];
+            $user->email = $data['correo'];
+            $user->password = bcrypt($data['contrasena']);
+            $user->sede_id = $data['sede_id'];
+            $user->save();
+            return redirect()->route('usuarios'); 
+        }
+    }
     public function index()
     {
         return view('login');
@@ -133,16 +163,43 @@ class UserController extends Controller
     }
     public function update($id, Request $request)
     {
-        if (session()->get('user')->is_admin && ($request->contrasena == $request->contrasena1 || $request->contrasena == null && $request->contrasena1 == null)) {
-            $user = User::where('id', $id)->first();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->sede_id = $request->sede_id;
-            $user->password = bcrypt($request->contrasena);
-            $user->save();
-            return redirect()->route('usuarios');
-        } else {
-            return redirect()->route('usuarios')->with('error', 'Las contraseñas no coinciden');
+
+        $validator = Validator::make($request->all(), 
+        [
+            'name' => 'required|min:3|max:255',
+            'email' => 'required|email',
+            'contrasena' => 'required|min:6',
+            'sede_id' => 'exists:sede,id'
+        ],
+        [
+            'name.required' => 'El nombre es requerido',
+            'name.min' => 'El nombre debe tener al menos 3 caracteres',
+            'name.max' => 'El nombre debe tener maximo 255 caracteres',
+            'email.required' => 'El email es requerido',
+            'email.email' => 'El email debe ser un email',
+            'contrasena.required' => 'La contraseña es requerida',
+            'contrasena.min' => 'La contraseña debe tener al menos 6 caracteres',
+            'sede_id.exists' => 'La sede no existe'
+        ]);
+
+        if($validator->fails())
+        {
+            return redirect()->route('usuarios')
+            ->withErrors($validator)
+            ->withInput();
+        }
+        else{
+            if (session()->get('user')->is_admin && ($request->contrasena == $request->contrasena1 || $request->contrasena == null && $request->contrasena1 == null)) {
+                $user = User::where('id', $id)->first();
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->sede_id = $request->sede_id;
+                $user->password = bcrypt($request->contrasena);
+                $user->save();
+                return redirect()->route('usuarios');
+            } else {
+                return redirect()->route('usuarios')->with('error', 'Las contraseñas no coinciden');
+            }
         }
 
     }

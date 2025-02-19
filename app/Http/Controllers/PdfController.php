@@ -19,8 +19,7 @@ class PdfController extends Controller
 {
     public function download($id)
     {
-         // Retrieve the muestra record
-    $muestra = Muestra::where('id', $id)->first();
+        $muestra = Muestra::where('id', $id)->first();
 
         $muestra->imagen = Imagen::where('muestra_id', $id)->get();
         $muestra->formato = Formato_muestra::where('id', $muestra->formato_muestra_id)->first();
@@ -29,20 +28,17 @@ class PdfController extends Controller
         $muestra->calidad = Calidad::where('id', $muestra->calidad_id)->first();
         $muestra->user = User::where('id', $muestra->user_id)->first();
 
-        // Fetch interpretations related to the muestra
         $interpretaciones = Interpretacion_texto::where('id_muestra', $id)->get();
         foreach ($interpretaciones as $interpretacion) {
             $interpretacion->interpretacionInfo = Interpretacion::where('id', $interpretacion->id_interpretacion)->first();
         }
 
-        // Fetch interpretations based on the tipo_estudio related to the muestra
         $interpretacion_texto = Interpretacion::where('tipo_estudio_id', 
             Tipo_estudio::where('id', 
                 Calidad::where('id', $muestra->calidad_id)->first()
                 ->tipo_estudio_id)->first()->id
         )->get();
 
-        // Generate the PDF with the view and the required data
         $pdf = Pdf::loadView('pdf', [
             'muestra' => $muestra,
             'interpretaciones' => $interpretaciones,
@@ -55,7 +51,6 @@ class PdfController extends Controller
             'interpretacion_texto' => $interpretacion_texto
         ]);
         
-        // Return the PDF as a download
         return $pdf->download('ejemplo.pdf');
     }
     
