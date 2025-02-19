@@ -16,7 +16,7 @@
                     <button class="botones" type="button" data-toggle="modal" data-target="#formModal">
                         <i class="fas fa-plus-circle mr-1"></i> Crear Muestra
                     </button>
-                </div>
+                </div><br>
                 @endif
 
                 <div class="row">
@@ -135,6 +135,18 @@
         </div>
     </div>
 </div>
+@stop
+
+@section('footer')
+<footer class="main-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p class="mb-0">&copy; 2025 <strong>Medac</strong>. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
 @stop
 
 @section('css')

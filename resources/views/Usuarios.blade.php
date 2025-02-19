@@ -99,6 +99,18 @@
     </div>
 @endforeach
 
+@section('footer')
+<footer class="main-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p class="mb-0">&copy; 2025 <strong>Medac</strong>. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+@stop
+
 @section('css')
 <style>
 .botones {

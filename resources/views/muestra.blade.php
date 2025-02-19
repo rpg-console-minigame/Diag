@@ -3,7 +3,7 @@
 @section('title', 'Detalles de la Muestra')
 
 @section('content_header')
-    <h1 class="m-0 text-dark"><i class="fas fa-vial mr-2"></i>Detalles de la Muestra</h1>
+<h1 class="m-0 text-dark"><i class="fas fa-vial mr-2"></i>Detalles de la Muestra</h1>
 @stop
 
 @section('content')
@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped text-break">
                                 <thead>
                                     <tr>
                                         <th><i class="fas fa-align-left mr-2"></i>Descripción</th>
@@ -50,49 +50,49 @@
                 </div>
 
                 @if ($muestra->imagen)
-                    <div class="card mb-4 hover-shadow-lg accion">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fas fa-image mr-2"></i>Imagen de la Muestra</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex flex-nowrap overflow-auto">
-                                @foreach ($muestra->imagen as $imagen)
-                                    <div class="mr-3" style="min-width: 250px;">
-                                        <img src="{{ asset('uploads/' . $imagen->link) }}" alt="Imagen de la muestra" class="img-fluid rounded" style="max-height: 200px; width: auto;">
-                                        <p class="text-center mt-2"><strong><i class="fas fa-search-plus mr-2"></i>Aumento:</strong> {{ $imagen->aumento }}</p>
-                                    </div>
-                                @endforeach
+                <div class="card mb-4 hover-shadow-lg accion">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-image mr-2"></i>Imagen de la Muestra</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex flex-nowrap overflow-auto">
+                            @foreach ($muestra->imagen as $imagen)
+                            <div class="mr-3" style="min-width: 250px;">
+                                <img src="{{ asset('uploads/' . $imagen->link) }}" alt="Imagen de la muestra" class="img-fluid rounded" style="max-height: 200px; width: auto;">
+                                <p class="text-center mt-2"><strong><i class="fas fa-search-plus mr-2"></i>Aumento:</strong> {{ $imagen->aumento }}</p>
                             </div>
+                            @endforeach
                         </div>
                     </div>
+                </div>
                 @endif
 
                 {{-- AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII --}}
 
                 @if ($interpretaciones->count())
-                    <div class="card mb-4 hover-shadow-lg accion">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fas fa-comment-alt mr-2"></i>Interpretaciones</h3>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group">
-                                @foreach($interpretaciones as $interpretacion)
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <p class="mb-1"><strong><i class="fas fa-align-left mr-2"></i>Descripción:</strong> {{ $interpretacion->texto }}</p>
-                                            <p class="mb-1"><strong><i class="fas fa-tag mr-2"></i>Tipo:</strong> {{ $interpretacion->interpretacionInfo->texto}}</p>
-                                            <p class="mb-0"><strong><i class="fas fa-calendar-alt mr-2"></i>Creado:</strong> {{ $interpretacion->created_at }}</p>
-                                        </div>
-                                        <a href="{{ route('interpretacionBorrar', $interpretacion->id) }}" class="papelera bg-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
+                <div class="card mb-4 hover-shadow-lg accion">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-comment-alt mr-2"></i>Interpretaciones</h3>
                     </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            @foreach($interpretaciones as $interpretacion)
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="mb-1"><strong><i class="fas fa-align-left mr-2"></i>Descripción:</strong> {{ $interpretacion->texto }}</p>
+                                        <p class="mb-1"><strong><i class="fas fa-tag mr-2"></i>Tipo:</strong> {{ $interpretacion->interpretacionInfo->texto}}</p>
+                                        <p class="mb-0"><strong><i class="fas fa-calendar-alt mr-2"></i>Creado:</strong> {{ $interpretacion->created_at }}</p>
+                                    </div>
+                                    <a href="{{ route('interpretacionBorrar', $interpretacion->id) }}" class="papelera bg-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
                 @endif
 
                 <div class="contenedor-botones">
@@ -127,9 +127,9 @@
                                         <label for="tipo_estudio"><i class="fas fa-book mr-2"></i>Tipo de Estudio:</label>
                                         <select class="form-control" name="tipo_estudio_id" id="tipo_estudio" required>
                                             @foreach ($tEstudios as $tipoEstudio)
-                                                <option value="{{ $tipoEstudio->id }}" {{ $muestra->tipo_estudio_id == $tipoEstudio->id ? 'selected' : '' }}>
-                                                    {{ $tipoEstudio->nombre }}
-                                                </option>
+                                            <option value="{{ $tipoEstudio->id }}" {{ $muestra->tipo_estudio_id == $tipoEstudio->id ? 'selected' : '' }}>
+                                                {{ $tipoEstudio->nombre }}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -141,10 +141,10 @@
                                         <label for="calidad"><i class="fas fa-star mr-2"></i>Calidad:</label>
                                         <select class="form-control" name="calidad_id" id="calidad" required>
                                             @foreach ($calidades as $calidad)
-                                                <option value="{{ $calidad->id }}" data-tipo-estudio="{{ $calidad->tipo_estudio_id }}"
-                                                    {{ $muestra->calidad_id == $calidad->id ? 'selected' : '' }}>
-                                                    {{ $calidad->nombre }}
-                                                </option>
+                                            <option value="{{ $calidad->id }}" data-tipo-estudio="{{ $calidad->tipo_estudio_id }}"
+                                                {{ $muestra->calidad_id == $calidad->id ? 'selected' : '' }}>
+                                                {{ $calidad->nombre }}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -156,9 +156,9 @@
                                         <label for="muestra"><i class="fas fa-flask mr-2"></i>Selecciona una muestra:</label>
                                         <select class="form-control" name="muestra_id" id="muestra" required>
                                             @foreach ($fMuestras as $fMuestra)
-                                                <option value="{{ $fMuestra->id }}" {{ $muestra->muestra_id == $fMuestra->id ? 'selected' : '' }}>
-                                                    {{ $fMuestra->nombre }}
-                                                </option>
+                                            <option value="{{ $fMuestra->id }}" {{ $muestra->muestra_id == $fMuestra->id ? 'selected' : '' }}>
+                                                {{ $fMuestra->nombre }}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -166,9 +166,9 @@
                                         <label for="naturaleza"><i class="fas fa-atom mr-2"></i>Tipo de Naturaleza:</label>
                                         <select class="form-control" name="tipo_naturaleza_id" id="naturaleza" required>
                                             @foreach ($tNaturalezas as $tNaturaleza)
-                                                <option value="{{ $tNaturaleza->id }}" {{ $muestra->tipo_naturaleza_id == $tNaturaleza->id ? 'selected' : '' }}>
-                                                    {{ $tNaturaleza->nombre }}
-                                                </option>
+                                            <option value="{{ $tNaturaleza->id }}" {{ $muestra->tipo_naturaleza_id == $tNaturaleza->id ? 'selected' : '' }}>
+                                                {{ $tNaturaleza->nombre }}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -201,7 +201,7 @@
                                         <label for="id_interpretacion"><i class="fas fa-key mr-2"></i>Clave de Interpretación</label>
                                         <select class="form-control" name="id_interpretacion" id="id_interpretacion" required>
                                             @foreach ($interpretacion_texto as $interpretacion)
-                                                <option value="{{ $interpretacion->id }}">{{ $interpretacion->clave }}</option>
+                                            <option value="{{ $interpretacion->id }}">{{ $interpretacion->clave }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -219,21 +219,36 @@
 </div>
 @stop
 
+@section('footer')
+<footer class="main-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p class="mb-0">&copy; 2025 <strong>Medac</strong>. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+@stop
+
 @section('css')
 <style>
     .card {
-        box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+        box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
         margin-bottom: 1rem;
     }
+
     .card-header {
         background-color: #102f4b;
-        border-bottom: 1px solid rgba(0,0,0,.125);
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
         padding: .75rem 1.25rem;
         color: aliceblue;
     }
+
     .list-group-item {
-        border: 1px solid rgba(0,0,0,.125);
+        border: 1px solid rgba(0, 0, 0, .125);
     }
+
     .btn-lg {
         padding: .5rem 1rem;
         font-size: 1.25rem;
@@ -249,7 +264,7 @@
     }
 
 
-.botones {
+    .botones {
         background-color: #102f4b;
         box-shadow: 0 5px 0 #0c2337;
         border-radius: 8px;
@@ -262,7 +277,7 @@
         width: 20%;
     }
 
-.papelera {
+    .papelera {
         box-shadow: 0 5px 0 black;
         border-radius: 8px;
         padding: 10px;
@@ -283,31 +298,40 @@
         transition: 0.1s ease;
         transform: translateY(5px);
     }
+
     .botones:active {
         box-shadow: none;
         transition: 0.1s ease;
         transform: translateY(5px);
     }
-    .accion{
+
+    .accion {
         border: 1px solid #ddd;
         border-radius: 15px;
         overflow: hidden;
         transition: transform 0.3s ease;
     }
-    .accion:hover{
+
+    .accion:hover {
         transform: scale(1.01);
+    }
+
+    .table td {
+        word-wrap: break-word;
+        white-space: normal;
+        max-width: 200px;
     }
 </style>
 @stop
 
 @section('js')
 <script>
-    $(function () {
+    $(function() {
         const tipoEstudioSelect = document.getElementById('tipo_estudio');
         const calidadSelect = document.getElementById('calidad');
         const opcionesOriginales = Array.from(calidadSelect.options);
 
-        tipoEstudioSelect.addEventListener('change', function () {
+        tipoEstudioSelect.addEventListener('change', function() {
             const selectedTipoEstudio = this.value;
             calidadSelect.innerHTML = '';
 
@@ -322,4 +346,3 @@
     });
 </script>
 @stop
-
