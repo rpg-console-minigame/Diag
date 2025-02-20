@@ -61,6 +61,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    {{-- Formulario para editar --}}
                     <form id="editarForm{{ $user->id }}" action="{{ route('usuarioUpdate', $user->id) }}" method="POST">
                         @csrf
                         <div class="form-group">
@@ -87,17 +88,23 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="contendor-botones">
+                        <div class="contenedor-botones">
                             <button type="submit" class="botones bg-success">Guardar Cambios</button>
-                            <button  type="submit" class="botones bg-danger"><a href="{{ route('usuarioDelete', $user->id) }}">Eliminar Usuario</a></button>
                         </div>
                     </form>
-                    
+
+                    <form action="{{ route('usuarioDelete', $user->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
+                        @csrf
+                        @method('POST')
+                        <button type="submit" class="botones bg-danger">Eliminar Usuario</button>
+                    </form>
+
                 </div>
             </div>
         </div>
     </div>
 @endforeach
+
 
 @section('css')
 <style>

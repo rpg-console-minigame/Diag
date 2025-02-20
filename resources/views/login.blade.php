@@ -1,115 +1,119 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnosis</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-
+    <title>Diagnosis</title>
     <style>
+
+        * {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: bold;
+        }
         body {
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background-color: #f8f9fa;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f4036, #2b8795);
+            margin: 0;
         }
 
-        .login-container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            background-color: rgb(234, 239, 243);
-        }
-
-        .login-container h2 {
-            margin-bottom: 20px;
-            color: #003366;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .form-group label {
-            color: #003366;
-            font-weight: bold;
-        }
-
-        .form-control {
-            border-radius: 5px;
-            border: 1px solid #003366;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            border-width: 0 0 1px;
-        }
-
-        .form-control:focus {
-            border-color: #003366;
-            box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
-        }
-
-        .btn-primary {
-            background-color: #002e4c;
-            border: none;
-            border-radius: 10px;
-            padding: 10px;
-            font-weight: bold;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-primary:hover {
-            background-color: #003366;
-        }
-
-        .btn-primary:focus {
-            box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
-        }
-
-        .input-container {
+        .container {
             display: flex;
-            align-items: center;
-            gap: 5px;
-            border: 1px solid black;
-            border-width: 0 0 1px;
-            background-color: white;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            height: 60%;
+        }
+
+        .login {
+            padding: 30px;
+            width: 35%;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: black;
+            text-align: center;
+            font-size: xx-large;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            font-size: 14px;
         }
 
         input {
-            padding: 8px;
-            font-size: 16px;
-            border: none;
-            background-color: white;
+            font-size: 10px;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
-    </style>
-    </style>
+
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            border: none;
+            background: linear-gradient(135deg, #0f4036, #2b8795);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .illustration {
+            width: 65%;
+            position: relative;
+        }
+
+        .illustration img {
+            width: 110%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 0 10px 10px 0;
+        }
+
     </style>
 </head>
-
 <body>
-    <div class="login-container">
-        <h1 class="text-center">MEDAC</h1>
-        <p class="text-center">Instituto Oficial de Formación Profesional</p>
-        <form action="{{ route('loginenter') }}" method="POST">
-            @csrf
 
-            <div class="form-group">
-                <label for="email"><span class="material-symbols-outlined">mail</span></label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
-            </div>
+    <div class="container">
+        <div class="login">
+            <h2>MEDAC</h2>
+            <form action="{{ route('loginenter') }}" method="POST">
+                @csrf
 
-            <div class="form-group">
-                <label for="password"><span class="material-symbols-outlined">vpn_key</span></label>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block mt-3">Iniciar Sesión</button>
-        </form>
+
+                <label for="email"><i class="fas fa-vial"></i>Correo Electrónico</label>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+
+
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="Contraseña" required>
+
+
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+        <div class="illustration">
+            <img src="img/login.jpg" alt="Ilustración">
+        </div>
     </div>
 
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
