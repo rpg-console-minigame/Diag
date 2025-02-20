@@ -11,13 +11,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    @if (session('user')->is_admin)
+                    {{-- @if (session('user')->is_admin) --}}
                         <div class="mb-3">
                             <button class="botones" type="button" data-toggle="modal" data-target="#formModal">
                                 <i class="fas fa-plus-circle mr-1"></i> Crear Muestra
                             </button>
                         </div><br>
-                    @endif
+                    {{-- @endif --}}
 
                     <div class="row">
                         @foreach ($muestras as $muestra)
