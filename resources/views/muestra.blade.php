@@ -99,7 +99,7 @@
                     <button class="botones" type="button" data-toggle="modal" data-target="#interpretarModal">
                         <i class="fas fa-comment-medical mr-2"></i> Interpretar Muestra
                     </button>
-                    <a href="{{route('pdf' , $muestra->id) }}" class="botones bg-secondary">
+                    <a href="{{route('pdf' , $muestra->id) }}" id="btn-imprimir" class="botones bg-secondary">
                         <i class="fas fa-file-pdf mr-2"></i> Imprimir
                     </a>
                     <button class="botones bg-info" data-toggle="modal" data-target="#editarModal">
@@ -344,5 +344,12 @@
 
         tipoEstudioSelect.dispatchEvent(new Event('change'));
     });
+</script>
+{{-- CARGA SWEET ALERT --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.querySelector('#btn-imprimir').addEventListener('click', () => {
+        Swal.fire("Imprimiendo muestra");
+    })
 </script>
 @stop
