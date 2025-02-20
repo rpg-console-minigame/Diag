@@ -137,7 +137,7 @@
                 <div class="card-body d-flex flex-column align-items-center justify-content-center"> 
                     @foreach ($muestra->imagen as $imagen)
                         <div class="text-center">
-                            <img src="{{ asset('uploads/' . $imagen->link) }}" 
+                            <img src="{{ public_path('uploads/' . $imagen->link) }}" 
                                 alt="Imagen de la muestra" 
                                 class="img-fluid rounded" 
                                 style="max-width: 100%; height: auto;">
